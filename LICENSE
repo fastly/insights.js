@@ -1,6 +1,8 @@
-MIT License
+Fastly Insights.js
+Build generated: <%= moment().format('YYYY-MM-DD') %>
+https://github.com/fastly/insights.js
 
-Copyright (c) 2018 Fastly
+Copyright (c) <%= moment().format('YYYY') %>, Fastly, Inc. All rights reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

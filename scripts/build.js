@@ -11,6 +11,7 @@ const nodeResolve = require("rollup-plugin-node-resolve");
 const builtins = require("rollup-plugin-node-builtins");
 const globals = require("rollup-plugin-node-globals");
 const replace = require("rollup-plugin-post-replace");
+const license = require("rollup-plugin-license");
 
 const config = require("../config.js");
 
@@ -63,7 +64,12 @@ function generateConfig({
                 '"<% POPS %>"': config.esi.pops
               }
             })
-          : null
+          : null,
+        license({
+          banner: {
+            file: "LICENSE"
+          }
+        })
       ].filter(p => p)
     },
     output: {
