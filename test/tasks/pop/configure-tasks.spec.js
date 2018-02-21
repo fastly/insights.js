@@ -1,4 +1,5 @@
 import * as lib from "../../../src/tasks/pop/configure-tasks";
+import assign from "../../../src/util/assign";
 import neighbours from "../../fixtures/neighbours";
 
 const fixture = {
@@ -46,7 +47,7 @@ describe("Configure POP tasks", () => {
       const othersFixture = ["HHN", "MAD"];
       const allFixture = neighboursFixture.concat(othersFixture);
       const result = lib.transform(
-        Object.assign({}, fixture, { pops: allFixture }),
+        assign({}, fixture, { pops: allFixture }),
         5,
         0
       );
