@@ -13,7 +13,6 @@ module.exports = function(config) {
     browserNoActivityTimeout: sauce ? 20000 : 10000,
     // Sadly, The order of these files is important
     files: [
-      { pattern: "src/config/**.js", included: false },
       { pattern: "src/lib/!(config).js", included: false },
       { pattern: "src/tasks/**/*.js", included: false },
       {

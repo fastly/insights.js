@@ -9,8 +9,8 @@ const devConfig = {
   server: {
     hosts: {
       host: "staging.fastly-insights.com",
-      lookup: "staging.fastly-insights.com",
-      pop: "staging.fastly-insights.com"
+      lookup: "u.staging.eu.fastly-insights.com",
+      pop: "pops.staging.fastly-insights.com"
     },
     datacenter: "LHR"
   },
