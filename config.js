@@ -7,7 +7,11 @@ const devConfig = {
   },
   build: "http://localhost:3001/dist/lib.js",
   server: {
-    host: "staging.fastly-insights.com",
+    hosts: {
+      host: "staging.fastly-insights.com",
+      lookup: "u.staging.eu.fastly-insights.com",
+      pop: "pops.staging.fastly-insights.com"
+    },
     datacenter: "LHR"
   },
   pops: [

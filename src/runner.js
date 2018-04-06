@@ -1,6 +1,5 @@
 import assign from "./util/assign";
 import sequence from "./util/sequence";
-import generateHosts from "./config/hosts";
 
 export default class Runner {
   constructor(tasks) {
@@ -47,7 +46,7 @@ export default class Runner {
 
     // Assign config
     this.config = config;
-    this.config.hosts = generateHosts(config.server.host);
+    this.config.hosts = config.server.hosts;
 
     // Generate task list
     const defaultTasks = config.tasks || [];
