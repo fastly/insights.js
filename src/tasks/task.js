@@ -25,7 +25,7 @@ class Task {
 
   send(data) {
     const { apiKey, session, hosts: { host } } = this.config;
-    const url = `https://${host}/beacon?k=${apiKey}&s=${session}`;
+    const url = `https://${host}/b?k=${apiKey}&s=${session}`;
     beacon(url, data);
   }
 

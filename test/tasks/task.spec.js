@@ -103,7 +103,7 @@ describe("Task", () => {
 
     it("should construct a query string with credentials", () => {
       task.send(dataFixture);
-      const url = `https://${fixture.hosts.host}/beacon?k=${fixture.apiKey}&s=${
+      const url = `https://${fixture.hosts.host}/b?k=${fixture.apiKey}&s=${
         fixture.session
       }`;
       expect(spy).to.have.been.called.with(url);
