@@ -50,7 +50,7 @@ class Task {
     return Promise.all([
       this.run(),
       getClientInfo(
-        `https://${this.config.testId}.${this.config.hosts.lookup}/lookup`
+        `https://${this.config.testId}.${this.config.hosts.lookup}/l`
       )
     ])
       .then(result => this.generateResult(this.config, ...result))
