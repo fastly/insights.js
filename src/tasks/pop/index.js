@@ -7,9 +7,7 @@ import { asyncGetEntry, normalizeEntry } from "../../lib/resource-timing";
 class Pop extends Task {
   constructor(config) {
     super(config);
-    this.url = `https://${this.config.host}/test_object.svg?unique=${
-      this.config.testId
-    }`;
+    this.url = `https://${this.config.host}/o.svg?u=${this.config.testId}`;
     this.url = this.url.toLowerCase();
   }
 
