@@ -25,7 +25,7 @@ class Task {
 
   send(data) {
     const { apiKey, session, hosts: { host } } = this.config;
-    const url = `https://${host}/beacon?k=${apiKey}&s=${session}`;
+    const url = `https://${host}/b?k=${apiKey}&s=${session}`;
     beacon(url, data);
   }
 
@@ -50,7 +50,7 @@ class Task {
     return Promise.all([
       this.run(),
       getClientInfo(
-        `https://${this.config.testId}.${this.config.hosts.lookup}/lookup`
+        `https://${this.config.testId}.${this.config.hosts.lookup}/l`
       )
     ])
       .then(result => this.generateResult(this.config, ...result))
