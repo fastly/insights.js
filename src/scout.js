@@ -1,10 +1,11 @@
 /* global config, FASTLY */
 import hasProp from "./util/has";
 
-const cutsTheMustard = (config.ctm = (hasProp(window, "Promise"),
-hasProp(window, "Set"),
-hasProp(window, "fetch"),
-hasProp(window, "performance.getEntries")));
+const cutsTheMustard = (config.ctm =
+  hasProp(window, "Promise") &&
+  hasProp(window, "Set") &&
+  hasProp(window, "fetch") &&
+  hasProp(window, "performance.getEntries"));
 
 function isWithinSample(sample) {
   const seed = parseFloat(Math.random().toFixed(2));
