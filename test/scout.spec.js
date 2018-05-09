@@ -11,13 +11,16 @@ function load() {
 
 describe("Scout", () => {
   let _insertBefore;
+  let lib;
 
   beforeEach(() => {
     _insertBefore = document.body.insertBefore;
-    document.body.insertBefore = chai.spy();
+    const insertBeforeHandler = s => (lib = s);
+    document.body.insertBefore = chai.spy(insertBeforeHandler);
   });
 
   afterEach(() => {
+    lib = null;
     document.body.insertBefore = _insertBefore;
     const script = document.getElementById("fastlyjs");
     document.body.removeChild(script);
@@ -46,6 +49,18 @@ describe("Scout", () => {
       // Forcing assertion to be async due to setTimeout in the script
       setTimeout(() => {
         expect(document.body.insertBefore).to.have.been.called();
+        done();
+      }, 0);
+    });
+  });
+
+  it("should invoke the library init method if it exists", done => {
+    load().then(() => {
+      // Forcing assertion to be async due to setTimeout in the script
+      setTimeout(() => {
+        window.FASTLY.init = chai.spy();
+        lib.onload();
+        expect(window.FASTLY.init).to.have.been.called();
         done();
       }, 0);
     });
