@@ -30,7 +30,9 @@ function init() {
   script.src = config.build;
 
   script.onload = () => {
-    FASTLY.init(config);
+    if (typeof FASTLY.init === "function") {
+      FASTLY.init(config);
+    }
   };
 
   baseScript.parentNode.insertBefore(script, baseScript);
