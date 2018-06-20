@@ -10,7 +10,13 @@ module.exports = function(config) {
     reporters: sauce ? ["mocha", "saucelabs"] : ["mocha"],
     concurrency: 2, // The concurrency limit on our Sauce Labs plan :/
     singleRun: true,
-    browserNoActivityTimeout: sauce ? 20000 : 10000,
+
+    // Stability settings
+    browserNoActivityTimeout: sauce ? 40000 : 10000,
+    browserDisconnectTimeout: sauce ? 10000 : 2000,
+    browserDisconnectTolerance: 10,
+    retryLimit: 10,
+
     // Sadly, The order of these files is important
     files: [
       { pattern: "src/lib/!(config).js", included: false },
