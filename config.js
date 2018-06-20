@@ -3,15 +3,15 @@ const devConfig = {
   session: "header.payload.signature",
   settings: {
     customer_id: "1",
-    sample: 1
-  },
-  build: "http://localhost:3001/dist/lib.js",
-  server: {
+    sample: 1,
     hosts: {
       host: "staging.fastly-insights.com",
       lookup: "u.staging.eu.fastly-insights.com",
       pop: "pops.staging.fastly-insights.com"
-    },
+    }
+  },
+  build: "http://localhost:3001/dist/lib.js",
+  server: {
     datacenter: "LHR"
   },
   pops: [

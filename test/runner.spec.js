@@ -45,7 +45,7 @@ const tasksFixture = {
 };
 
 const configFixture = {
-  server: {
+  settings: {
     host: "LHR"
   },
   tasks: [{ type: "defaultTask", id: "d" }]
