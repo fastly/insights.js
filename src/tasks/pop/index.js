@@ -35,11 +35,9 @@ class Pop extends Task {
 
   run() {
     let subjectId;
-    const resourceEntryPromise = asyncGetEntry(this.url);
 
-    return this.fetchObjectAndId()
-      .then(id => (subjectId = id))
-      .then(() => resourceEntryPromise)
+    return Promise.all([this.fetchObjectAndId(), asyncGetEntry(this.url)])
+      .then(([id, entry]) => (subjectId = id) && entry)
       .then(normalizeEntry)
       .then(timing => {
         const meta = { id: subjectId, attempted_id: this.config.id };
