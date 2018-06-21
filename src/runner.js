@@ -46,7 +46,7 @@ export default class Runner {
 
     // Assign config
     this.config = config;
-    this.config.hosts = config.server.hosts;
+    this.config.hosts = config.settings.hosts;
 
     // Generate task list
     const defaultTasks = config.tasks || [];
