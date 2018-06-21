@@ -9,9 +9,11 @@ function load() {
   });
 }
 
-describe("Scout", () => {
+describe("Scout", function() {
   let _insertBefore;
   let lib;
+
+  this.timeout(5000);
 
   beforeEach(() => {
     _insertBefore = document.body.insertBefore;
