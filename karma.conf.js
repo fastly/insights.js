@@ -1,19 +1,19 @@
 const customLaunchers = require("./saucelabs-browsers");
 
 module.exports = function(config) {
-  const sauce = config.withSaucelabs || false;
+  const isSauce = config.withSaucelabs || false;
 
   config.set({
     frameworks: ["mocha", "chai-spies", "chai-as-promised", "chai"],
     customLaunchers: customLaunchers,
-    browsers: sauce ? Object.keys(customLaunchers) : ["Electron"],
-    reporters: sauce ? ["mocha", "saucelabs"] : ["mocha"],
+    browsers: isSauce ? Object.keys(customLaunchers) : ["Electron"],
+    reporters: isSauce ? ["mocha", "saucelabs"] : ["mocha"],
     concurrency: 2, // The concurrency limit on our Sauce Labs plan :/
     singleRun: true,
 
     // Stability settings
-    browserNoActivityTimeout: sauce ? 40000 : 10000,
-    browserDisconnectTimeout: sauce ? 10000 : 2000,
+    browserNoActivityTimeout: isSauce ? 40000 : 10000,
+    browserDisconnectTimeout: isSauce ? 10000 : 2000,
     browserDisconnectTolerance: 10,
     retryLimit: 10,
 
