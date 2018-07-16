@@ -75,8 +75,7 @@ function generateConfig({
     output: {
       file: getOutput(dir, input),
       format: "iife",
-      intro,
-      name: "FASTLY"
+      intro
     }
   };
 }

@@ -1,4 +1,4 @@
-/* global config, FASTLY */
+/* global config */
 import hasProp from "./util/has";
 
 const cutsTheMustard = (config.ctm =
@@ -30,8 +30,8 @@ function init() {
   script.src = config.build;
 
   script.onload = () => {
-    if (typeof FASTLY.init === "function") {
-      FASTLY.init(config);
+    if (typeof window.FASTLY.init === "function") {
+      window.FASTLY.init(config);
     }
   };
 
@@ -42,4 +42,6 @@ if (cutsTheMustard && isWithinSample(config.settings.sample)) {
   loadWhenReady(() => setTimeout(init, config.settings.delay || 0));
 }
 
-export { cutsTheMustard as ctm, config };
+window.FASTLY = window.FASTLY || {};
+window.FASTLY.ctm = cutsTheMustard;
+window.FASTLY.config = config;
