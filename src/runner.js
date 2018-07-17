@@ -78,10 +78,11 @@ export default class Runner {
     }
 
     this.state.running = true;
+    this.results = this.results || [];
 
     // Run tests sequentially
     return sequence(this.taskQueue)
-      .then(data => (this.results = data))
+      .then(data => Array.prototype.push.apply(this.results, data))
       .then(() => {
         this.state.running = false;
         return (this.state.hasRan = true);
