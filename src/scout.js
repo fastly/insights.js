@@ -1,5 +1,6 @@
 /* global config */
 import hasProp from "./util/has";
+import hasDNT from "./lib/dnt";
 
 const cutsTheMustard = (config.ctm =
   hasProp(window, "Promise") &&
@@ -38,7 +39,11 @@ function init() {
   baseScript.parentNode.insertBefore(script, baseScript);
 }
 
-if (cutsTheMustard && isWithinSample(config.settings.sample)) {
+if (
+  cutsTheMustard &&
+  !(hasDNT && config.settings.dnt) &&
+  isWithinSample(config.settings.sample)
+) {
   loadWhenReady(() => setTimeout(init, config.settings.delay || 0));
 }
 

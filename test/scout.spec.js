@@ -97,6 +97,25 @@ describe("Scout", function() {
       }));
   });
 
+  describe("DNT", () => {
+    let _doNotTrack;
+
+    before(() => {
+      window.FASTLY = { config: { settings: { dnt: true } } };
+      _doNotTrack = window.doNotTrack;
+      window.doNotTrack = true;
+    });
+
+    after(() => {
+      window.doNotTrack = _doNotTrack;
+    });
+
+    it("should not inject script if Do Not Track setting is enabled", () =>
+      load().then(() => {
+        expect(document.body.insertBefore).to["not"].have.been.called();
+      }));
+  });
+
   describe("delayed load", () => {
     before(() => {
       window.FASTLY = { config: { settings: { sample: 1, delay: 1 } } };

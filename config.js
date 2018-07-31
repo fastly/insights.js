@@ -4,6 +4,7 @@ const devConfig = {
   settings: {
     customer_id: "1",
     sample: 1,
+    dnt: false,
     hosts: {
       host: "staging.fastly-insights.com",
       lookup: "u.staging.eu.fastly-insights.com",
