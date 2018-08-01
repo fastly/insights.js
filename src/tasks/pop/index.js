@@ -1,4 +1,5 @@
 import assign from "../../util/assign";
+import prefixKeys from "../../util/prefix-keys";
 
 import Task from "../task";
 import { transform as popsToTasks } from "./configure-tasks";
@@ -26,13 +27,6 @@ class Pop extends Task {
     return fetch(this.url).then(res => res.headers.get("X-Datacenter"));
   }
 
-  prefixKeys(obj, prefix) {
-    return Object.keys(obj).reduce((clone, key) => {
-      clone[prefix + key] = obj[key];
-      return clone;
-    }, {});
-  }
-
   run() {
     let subjectId;
 
@@ -41,7 +35,7 @@ class Pop extends Task {
       .then(normalizeEntry)
       .then(timing => {
         const meta = { id: subjectId, attempted_id: this.config.id };
-        const data = this.prefixKeys(assign(meta, timing), "subject_");
+        const data = prefixKeys(assign(meta, timing), "subject_");
         return data;
       });
   }

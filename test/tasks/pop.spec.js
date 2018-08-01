@@ -84,19 +84,4 @@ describe("POP", () => {
       expect(subject_id).to.equal("LHR");
       expect(subject_id).to.not.equal(fixture.id);
     }));
-
-  describe("#prefixKeys", () => {
-    it("should prefix all keys of an object with a given string", () => {
-      const fixture = { foo: "bar" };
-      const result = task.prefixKeys(fixture, "baz_");
-
-      expect(result).to.have.property("baz_foo");
-      expect(result).to.not.have.property("foo");
-    });
-
-    it("should not mutate the original object", () => {
-      const fixture = Object.freeze({ foo: "bar" });
-      expect(task.prefixKeys.bind(null, fixture, "baz_")).to.not.throw();
-    });
-  });
 });
