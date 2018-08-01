@@ -14,6 +14,7 @@ const devConfig = {
   server: {
     datacenter: "LHR"
   },
+  tasks: [],
   pops: [
     {
       neighbours: ["YUL", "ORD", "JFK", "MSP"],
@@ -1287,6 +1288,7 @@ const prod = `
 		settings: '<% CONFIG %>',
 		build: '<% BUILD %>',
 		server: '<% SERVER %>',
+        tasks: '<% TASKS %>',
 		pops: '<% POPS %>'
 	};
 `;
@@ -1297,6 +1299,7 @@ const esi = {
   config: '<esi:include src="/esi/js/config.json" />',
   build: '<esi:include src="/esi/js/build.js" />',
   server: '<esi:include src="/esi/js/server.js" />',
+  tasks: '<esi:include src="/esi/js/tasks.json" />',
   pops: '<esi:include src="/esi/js/neighbours.json" />'
 };
 

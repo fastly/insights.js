@@ -61,6 +61,7 @@ function generateConfig({
                 '"<% CONFIG %>"': config.esi.config,
                 '"<% BUILD %>"': config.esi.build,
                 '"<% SERVER %>"': config.esi.server,
+                '"<% TASKS %>"': config.esi.tasks,
                 '"<% POPS %>"': config.esi.pops
               }
             })
