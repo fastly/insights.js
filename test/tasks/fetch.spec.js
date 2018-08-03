@@ -3,19 +3,17 @@ import {
   restore as getEntryRestore
 } from "../../src/lib/resource-timing";
 
-import Lib from "../../src/tasks/pop/index.js";
+import Lib from "../../src/tasks/fetch/index.js";
 import testId from "../../src/lib/unique-id";
 import resourceFixture from "../fixtures/resource-timing-entry";
 
 const fixture = {
-  id: "LCY",
-  type: "object",
-  server: {
-    host: "test.com"
-  }
+  id: "test",
+  type: "fetch",
+  host: "test.com"
 };
 
-describe("POP", () => {
+describe("Fetch", () => {
   let task;
   let mock;
 
@@ -51,16 +49,6 @@ describe("POP", () => {
   it("should be a class", () => {
     expect(Lib).to.be.an("function");
     expect(new Lib(fixture)).to.be.an.instanceOf(Lib);
-  });
-
-  it("should have a static hasCustomConfiguration property", () => {
-    expect(Lib.hasCustomConfiguration).to.exist;
-    expect(Lib.hasCustomConfiguration).to.be.true;
-  });
-
-  it("should expose static configure method", () => {
-    expect(Lib.configure).to.exist;
-    expect(Lib.configure).to.be.an("function");
   });
 
   it("should make fetch request to provided hostname", () =>
