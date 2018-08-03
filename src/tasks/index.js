@@ -1,3 +1,2 @@
-import Pop from "./pop/index";
-
-export { Pop as pop };
+export { default as pop } from "./pop";
+export { default as fetch } from "./fetch";

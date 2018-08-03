@@ -113,6 +113,29 @@ The following table lists each of the possible tasks Fastly Insights may run on 
                 </ul>
             </td>
         </tr>
+        <tr>
+            <td>Fetch</td>
+            <td>Intended to measure the performance characteristics of a Fastly Insights owned HTTP endpoint. For experimentation and diagnostic purposes.</td>
+            <td>
+                <ul>
+                    <li><a href="https://w3c.github.io/resource-timing/#performanceresourcetiming">network timing</a></li>
+                    <li><a href="https://w3c.github.io/server-timing/">server timging</a></li>
+                    <li>network characteristics</li>
+                    <li>browser type (<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent">User-Agent header</a> value is automatically normalized to browser vendor and version)</li>
+                    <li>DNS recursive resolver</li>
+                    <li>operating system</li>
+                <ul>
+            </td>
+            <td>
+                <ul>
+                    <li>anonymized Internet Protocol (IP) addresses (client IP addresses are automatically truncated to a /28 network prefix for IPv4 and /58 for IPv6 addresses)</li>
+                    <li>country or city-level geographic location</li>
+                    <li>date/time stamps</li>
+                    <li>network characteristics unique to the client connection</li>
+                    <li>browser capabilities: TLS protocol and cipher suites</li>
+                </ul>
+            </td>
+        </tr>
     </tbody>
 </table>
 
