@@ -29,7 +29,7 @@ class Task {
     beacon(url, data);
   }
 
-  generateResult({ testId, apiKey, server, type }, result, clientInfo) {
+  generateResult({ testId, apiKey, server, type, id }, result, clientInfo) {
     return assign(
       {
         test_id: testId,
@@ -38,6 +38,7 @@ class Task {
         test_server: JSON.stringify(server),
         test_timestamp: Math.floor(Date.now() / 1000), // Unix timestamp in seconds
         task_type: type,
+        task_id: id,
         task_schema_version: "0.0.0",
         task_client_data: JSON.stringify(result),
         task_server_data: "<% SERVER_DATA %>"

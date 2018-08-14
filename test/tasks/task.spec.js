@@ -120,6 +120,7 @@ describe("Task", () => {
       testId: "1234",
       apiKey: "1111",
       server: { host: "www.test.com" },
+      id: "iad",
       type: "test"
     };
     const resultFixture = { foo: "bar" };
@@ -152,6 +153,8 @@ describe("Task", () => {
       expect(result.test_server).to.equal(JSON.stringify(configFixture.server));
       expect(result).to.have.property("task_type");
       expect(result.task_type).to.equal("test");
+      expect(result).to.have.property("task_id");
+      expect(result.task_id).to.equal("iad");
     });
 
     it("should assign a unix timestamp property of the task run", () => {
