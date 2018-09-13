@@ -119,7 +119,7 @@ The following table lists each of the possible tasks Fastly Insights may run on 
             <td>
                 <ul>
                     <li><a href="https://w3c.github.io/resource-timing/#performanceresourcetiming">network timing</a></li>
-                    <li><a href="https://w3c.github.io/server-timing/">server timging</a></li>
+                    <li><a href="https://w3c.github.io/server-timing/">server timing</a></li>
                     <li>network characteristics</li>
                     <li>browser type (<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent">User-Agent header</a> value is automatically normalized to browser vendor and version)</li>
                     <li>DNS recursive resolver</li>
