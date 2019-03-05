@@ -1,5 +1,6 @@
 import assign from "./util/assign";
 import sequence from "./util/sequence";
+import shuffle from "./util/shuffle";
 
 export default class Runner {
   constructor(tasks) {
@@ -60,7 +61,10 @@ export default class Runner {
     const tasks = hydratedTasks.map(task => new Tasks[task.type](task));
 
     // Generate queue task of functions to run
-    this.taskQueue = tasks.map(task => () => task.execute());
+    const taskQueue = tasks.map(task => () => task.execute());
+
+    // Randomly shuffle taskQueue to avoid systematic bias
+    this.taskQueue = shuffle(taskQueue);
 
     // Run tasks!
     return this.run();
