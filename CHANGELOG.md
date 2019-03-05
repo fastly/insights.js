@@ -1,5 +1,13 @@
 # Insights.js changelog
 
+## 1.2.0
+Randomly shuffle task queue
+- [#22](https://github.com/fastly/insights.js/pull/22) Randomly shuffle task queue
+
+## 1.1.1
+Task ID
+- [#20](https://github.com/fastly/insights.js/pull/20) Add task_id to base task result model
+
 ## 1.1.0
 Fetch task
 - [#16](https://github.com/fastly/insights.js/pull/16) Add new fetch task
