@@ -5,17 +5,30 @@ import PerformanceObserver from "./performance-observer";
 
 const EXCLUDED_PROPS = ["name", "initiatorType", "entryType"];
 
-function asyncGetEntry(name, timeout = 5000) {
+function asyncGetEntry(name, timeout = 5000, delay = 0) {
   return new Promise((resolve, reject) => {
     let entry;
 
-    const observer = new PerformanceObserver((list, observer) => {
-      const namedEntries = list.getEntriesByName(name);
-      entry = namedEntries.shift();
+    function getEntry(list) {
+      return list.getEntriesByName(name).shift();
+    }
 
-      if (entry) {
-        observer.disconnect();
-        resolve(entry);
+    const observer = new PerformanceObserver((list, observer) => {
+      if (delay) {
+        setTimeout(() => {
+          entry = getEntry(list);
+          if (entry) {
+            observer.disconnect();
+            resolve(entry);
+          }
+        }, delay);
+      } else {
+        entry = getEntry(list);
+
+        if (entry) {
+          observer.disconnect();
+          resolve(entry);
+        }
       }
     });
 

@@ -18,7 +18,12 @@ class Fetch extends Task {
   run() {
     let subjectId;
 
-    return Promise.all([this.fetchObjectAndId(), asyncGetEntry(this.url)])
+    const delay = /any[2]?-v4/.test(this.url) ? 1000 : 0;
+
+    return Promise.all([
+      this.fetchObjectAndId(),
+      asyncGetEntry(this.url, 5000, delay)
+    ])
       .then(([id, entry]) => (subjectId = id) && entry)
       .then(normalizeEntry)
       .then(timing =>
