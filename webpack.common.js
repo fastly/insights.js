@@ -8,6 +8,15 @@ module.exports = {
   module: {
     rules: [
       {
+        enforce: 'pre',
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: {
+          fix: true
+        }
+      },
+      {
         test: /worker\.ts$/,
         use: 'workerize-loader'
       },
