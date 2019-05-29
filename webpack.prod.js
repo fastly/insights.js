@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
@@ -18,6 +19,9 @@ module.exports = merge(common, {
    plugins: [
       new webpack.BannerPlugin({
          banner: getLicenseWithDate()
+      }),
+      new BundleAnalyzerPlugin({
+         analyzerMode: 'static'
       })
    ],
    output: {
