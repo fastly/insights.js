@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "test": "",
-    "start:dev": "webpack-dev-server --progress --open --config webpack.dev.js",
+    "start": "webpack-dev-server --progress --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "build:dev": "webpack --config webpack.dev.js",
     "lint": "tsc --noEmit && eslint '*/**/*.ts' --fix"
