@@ -4,7 +4,7 @@
   "main": "dist/lib.js",
   "license": "MIT",
   "scripts": {
-    "test": "",
+    "test": "mocha -r ./babel-register.js 'src/**/*.spec.ts'",
     "start": "webpack-dev-server --progress --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "build:dev": "webpack --config webpack.dev.js",
