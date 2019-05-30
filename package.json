@@ -4,7 +4,9 @@
   "main": "dist/lib.js",
   "license": "MIT",
   "scripts": {
-    "test": "",
+    "test": "npm run test:once && npm run lint",
+    "test:once": "jest --coverage",
+    "test:watch": "jest --watch",
     "start": "webpack-dev-server --progress --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "build:dev": "webpack --config webpack.dev.js",
