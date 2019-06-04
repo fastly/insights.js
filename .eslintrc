@@ -38,7 +38,6 @@
         prefer-const: 1,
         no-const-assign: 2,
         "@typescript-eslint/no-explicit-any": 0,
-        "@typescript-eslint/explicit-function-return-type": 0,
         indent: ["error", 2]
 	},
 	globals: {

@@ -1,5 +1,5 @@
 function mean(values: number[]): number {
-  return values.reduce((memo: number, i: number) => memo + i) / values.length;
+  return values.reduce((memo: number, i): number => memo + i) / values.length;
 }
 
 /**
@@ -24,14 +24,14 @@ function chooseRenormalize(probs: number[], k: number): number[] {
   if (k >= probs.length)
     return Array(probs.length)
       .fill(null)
-      .map((x: null, index: number) => index);
+      .map((x: null, index): number => index);
 
   // Since we are mutating the probabilities vector, we copy it first
-  const p = probs.map(x => x);
+  const p = [...probs];
 
   // This assumes that the probability vector is normalized. If it is not, it
   // should be changed to the sum of the weights
-  let remaining = 1;
+  let remaining = probs.reduce((memo, prob): number => memo + prob);
 
   // The weight of an additional "ghost" element that we will use to
   // inhibit running tasks that should have low probability
