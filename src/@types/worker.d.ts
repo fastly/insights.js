@@ -1,7 +1,7 @@
 declare module "workerize-loader!*" {
   class WorkerizeWorker extends Worker {
     public constructor();
-    public init(): void;
+    public init(): Promise<Config>;
   }
 
   export const mockInit: jest.Mock;
