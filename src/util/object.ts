@@ -4,17 +4,23 @@
 export function hasProperty(obj: any, propertyPath: string): boolean {
   return propertyPath.split(".").every(
     (prop: string): boolean => {
-      if (
-        typeof obj !== "object" ||
-        obj === null ||
-        !(prop in obj) ||
-        typeof obj[prop] === "undefined"
-      ) {
-        return false;
-      } else {
-        obj = obj[prop];
-        return true;
+      let hasProp: boolean;
+      try {
+        hasProp = obj.hasOwnProperty(prop);
+      } catch (e) {
+        hasProp = !(
+          typeof obj !== "object" ||
+          obj === null ||
+          !(prop in obj) ||
+          typeof obj[prop] === "undefined"
+        );
       }
+
+      if (hasProp) {
+        obj = obj[prop];
+      }
+
+      return hasProp;
     }
   );
 }
