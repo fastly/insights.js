@@ -8,8 +8,7 @@ function mean(values: number[]): number {
  * until we exceed the generated value
  */
 function basicChooseOne(probs: number[], mass: number): number {
-  // const r = mass * Math.random() // FiXME
-  const r = mass * 0.5;
+  const r = mass * Math.random();
   let i = 0;
   let s = probs[0];
   while (s < r) {

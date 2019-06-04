@@ -1,7 +1,10 @@
 import chooseRenormalize from "./chooseRenormalize";
+import { mockRandomForEach } from "jest-mock-random";
 
 describe("chooseRenormalize", (): void => {
-  it("should select the right values, k>1", (): void => {
+  mockRandomForEach([0.5]);
+
+  it("should select the right values", (): void => {
     const probs = [
       0.14285714285714285,
       0.09523809523809523,
