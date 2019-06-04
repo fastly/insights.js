@@ -17,10 +17,6 @@ module.exports = {
         }
       },
       {
-        test: /worker\.ts$/,
-        use: 'workerize-loader'
-      },
-      {
         test: /\.ts$/,
         use: 'babel-loader',
         exclude: /node_modules/
