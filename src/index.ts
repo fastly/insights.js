@@ -7,7 +7,7 @@ const requiredFeatures = ["Worker", "Promise", "fetch"];
 // Test whether browser has required feature support
 const hasFeatureSupport = hasProperties(window, requiredFeatures);
 
-// Define gloabl state
+// Define global state
 const state: Fastly = {
   client: {
     hasFeatureSupport
