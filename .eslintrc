@@ -28,7 +28,7 @@
         dot-notation: 0,
         semi: [2, "always"],
         strict: [2, "global"],
-        valid-jsdoc: 1,
+        valid-jsdoc: 0,
         no-irregular-whitespace: 1,
         no-multi-spaces: 2,
         one-var: [2, "never"],

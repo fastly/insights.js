@@ -1,8 +1,12 @@
 {
   "name": "insights.js",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "main": "dist/lib.js",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fastly/insights.js.git"
+  },
   "scripts": {
     "test": "npm run test:once && npm run lint",
     "test:once": "jest --coverage",
@@ -33,6 +37,7 @@
     "html-webpack-plugin": "^3.2.0",
     "husky": "^2.3.0",
     "jest": "^24.8.0",
+    "jest-mock-random": "^1.0.2",
     "prettier": "^1.17.1",
     "typescript": "^3.4.5",
     "webpack": "^4.32.2",
