@@ -1,5 +1,6 @@
-const hasBeaconSupport =
-  "sendBeacon" in navigator && typeof navigator.sendBeacon === "function";
+import { hasProperty } from "./object";
+
+const hasBeaconSupport = hasProperty(navigator, "sendBeacon");
 
 function beacon(url: string, data: string): void {
   if (hasBeaconSupport) {

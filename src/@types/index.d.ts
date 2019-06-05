@@ -54,7 +54,7 @@ interface Config {
 interface ClientInfo {
   client_user_agent: string;
   client_ip: string;
-  client_asn: string;
+  client_asn: number;
   client_region: string;
   client_country_code: string;
   client_continent_code: string;
@@ -65,30 +65,7 @@ interface ClientInfo {
   client_latitude: string;
   client_longitude: string;
   resolver_ip: string;
-  resolver_asn: string;
-  resolver_region: string;
-  resolver_country_code: string;
-  resolver_continent_code: string;
-  resolver_conn_speed: string;
-  resolver_latitude: string;
-  resolver_longitude: string;
-}
-
-interface RawClientInfo {
-  client_user_agent: string;
-  client_ip: string;
-  client_asn: string;
-  client_region: string;
-  client_country_code: string;
-  client_continent_code: string;
-  client_metro_code: string;
-  client_postal_code: string;
-  client_conn_speed: string;
-  client_gmt_offset: string;
-  client_latitude: string;
-  client_longitude: string;
-  resolver_ip: string;
-  resolver_asn: string;
+  resolver_asn: number;
   resolver_region: string;
   resolver_country_code: string;
   resolver_continent_code: string;

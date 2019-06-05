@@ -1,5 +1,4 @@
 import assign from "../util/assign";
-import { generateId } from "../util/unique-id";
 import { beacon } from "../util/beacon";
 import { getClientInfo } from "../util/client-info";
 
@@ -14,11 +13,7 @@ class Task {
 
   public constructor(config: any) {
     // TODO: more strict typing here
-    this.config = assign({}, config, { testId: generateId() });
-  }
-
-  public static get hasCustomConfiguration(): boolean {
-    return false;
+    this.config = assign({}, config);
   }
 
   public encode(data: Beacon): string {
