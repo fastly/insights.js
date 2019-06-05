@@ -1,6 +1,6 @@
 // Utility function to test whether an object has own nested property
 // This is used instead of Object.prototype.hasOwnProperty() due to browser support
-// Accpets object path in dot notation form
+// Accepts object path in dot notation form
 export function hasProperty(obj: any, propertyPath: string): boolean {
   return propertyPath.split(".").every(
     (prop: string): boolean => {
