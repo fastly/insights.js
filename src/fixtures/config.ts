@@ -6,6 +6,7 @@ const configFixture: Config = {
     host: "test.fastly-insights.com",
     lookup: "eu.u.test.fastly-insights.com"
   },
+  // AKA the "config" object --------------------------
   settings: {
     initial_delay: 0,
     max_tasks: 20,
