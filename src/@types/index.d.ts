@@ -16,6 +16,7 @@ interface Settings {
   max_tasks: number;
   report_errors: boolean;
   sample_rate: number;
+  token: string;
 }
 
 interface Server {
@@ -32,7 +33,6 @@ interface Task {
 }
 
 interface Config {
-  apiKey: string;
   session: string;
   hosts: Host;
   settings: Settings;
