@@ -20,6 +20,7 @@ const configFixture: Config = {
   tasks: [
     {
       name: "MAD",
+      id: "77d7es76-77ae-477a-7a33-7a7f7c162004",
       req_header: "",
       resource: "https://mad-v4.pops.test.fastly-insights.com/o.svg",
       resp_header: "",
@@ -28,6 +29,7 @@ const configFixture: Config = {
     },
     {
       name: "LCY",
+      id: "88271afb-88ae-4888-abca-8817aba9182a",
       req_header: "",
       resource: "https://lcy-v4.pops.test.fastly-insights.com/o.svg",
       resp_header: "",
@@ -36,6 +38,7 @@ const configFixture: Config = {
     },
     {
       name: "rtt",
+      id: "8a8100bc-9217-48a7-918f-81673da8a99f",
       req_header: "",
       resource: "https://www.fastly-insights.com/rtt.json",
       resp_header: "",

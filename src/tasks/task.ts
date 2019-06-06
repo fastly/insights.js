@@ -6,75 +6,125 @@ interface State {
   hasRan: boolean;
 }
 
-class Task {
-  public config: any = {};
-  public result: any = {};
+/* eslint-disable @typescript-eslint/camelcase */
+const blankBeacon: Beacon = {
+  client_user_agent: "",
+  client_ip: "",
+  client_asn: 0,
+  client_region: "",
+  client_country_code: "",
+  client_continent_code: "",
+  client_metro_code: "",
+  client_postal_code: "",
+  client_conn_speed: "",
+  client_gmt_offset: "",
+  client_latitude: "",
+  client_longitude: "",
+  resolver_ip: "",
+  resolver_asn: 0,
+  resolver_region: "",
+  resolver_country_code: "",
+  resolver_continent_code: "",
+  resolver_conn_speed: "",
+  resolver_latitude: "",
+  resolver_longitude: "",
+  test_id: "",
+  test_api_key: "",
+  test_lib_version: "",
+  test_server: "",
+  test_timestamp: 0,
+  task_type: "",
+  task_id: "",
+  task_schema_version: "",
+  task_client_data: "",
+  task_server_data: ""
+};
+/* eslint-enable @typescript-eslint/camelcase */
+
+class Task implements TaskInterface {
+  private config: Config;
+  private taskData: TaskData;
+  private beacon: Beacon;
   public state: State = { hasRan: false };
 
-  public constructor(config: any) {
+  public constructor(config: Config, taskData: TaskData) {
     // TODO: more strict typing here
+    this.beacon = assign({}, blankBeacon);
     this.config = assign({}, config);
+    this.taskData = taskData;
   }
 
-  public encode(data: Beacon): string {
+  private encode(data: Beacon): string {
     return JSON.stringify(data);
   }
 
-  public send(data: any): void {
+  /**
+   * Sending data to the server: fire-and-forget. Not tracking if successful.
+   * @param data - JSON-encoded string
+   */
+  private send(data: string): void {
     const {
-      apiKey,
       session,
+      settings,
       hosts: { host }
     } = this.config;
-    const url = `https://${host}/b?k=${apiKey}&s=${session}`;
+    const url = `https://${host}/b?k=${settings.token}&s=${session}`;
     beacon(url, data);
   }
 
   /**
    * Creates an object that can be beaconed to the server
-   * @param result - comes from this.run()
+   * @param testResult - comes from this.test()
    * @param clientInfo - comes from getClientInfo()
    */
-  public generateResult(result: any, clientInfo: ClientInfo): any {
-    const { testId, apiKey, server, type, id } = this.config;
+  private generateBeacon(
+    testResult: TestResult,
+    clientInfo: ClientInfo
+  ): Beacon {
+    const { settings, server } = this.config;
     /* eslint-disable @typescript-eslint/camelcase */
-    return assign(
+    this.beacon = assign(
       {
-        test_id: testId,
-        test_api_key: apiKey,
+        test_id: settings.token,
+        test_api_key: this.config.settings.token,
         test_lib_version: "<% VERSION %>",
         test_server: JSON.stringify(server),
         test_timestamp: Math.floor(Date.now() / 1000), // Unix timestamp in seconds
-        task_type: type,
-        task_id: id,
+        task_type: this.taskData.type,
+        task_id: this.taskData.id,
         task_schema_version: "0.0.0",
-        task_client_data: JSON.stringify(result),
+        task_client_data: JSON.stringify(testResult),
         task_server_data: "<% SERVER_DATA %>"
       },
       clientInfo
     );
     /* eslint-disable @typescript-eslint/camelcase */
+    return this.beacon;
   }
 
   /**
-   * ABSTRACT METHOD
+   * ABSTRACT TEST METHOD
    */
-  public run(): Promise<any> {
-    return Promise.resolve({});
+  private test(): Promise<TestResult> {
+    const mockOutput = { value: `test run ${this.taskData.id}` };
+    return Promise.resolve(mockOutput);
   }
 
   public execute(): Promise<any> {
-    const clientInfoUrl = `https://${this.config.testId}.${
-      this.config.hosts.lookup
-    }/l`;
-    return Promise.all([this.run(), getClientInfo(clientInfoUrl)])
-      .then((value): any => this.generateResult(...value))
-      .then((result): any => (this.result = result))
+    const lookup = this.config.hosts.lookup;
+    const testId = this.config.settings.token;
+    const clientInfoUrl = `https://${testId}.${lookup}/l`;
+    return Promise.all([this.test(), getClientInfo(clientInfoUrl)])
+      .then((runAndClientInfo): any => this.generateBeacon(...runAndClientInfo))
       .then(this.encode)
-      .then((result): void => this.send(result))
-      .then((): any => this.result)
-      .catch((): Promise<any> => Promise.resolve(this.result));
-    //TODO: do something better than swallowing the error
+      .then((encodedBeacon): void => this.send(encodedBeacon))
+      .then((): Beacon => this.beacon) // Clean up return data
+      .catch(
+        (): Promise<any> => {
+          //TODO: do something better than swallowing the error
+          return Promise.resolve(this.beacon);
+        }
+      );
   }
 }
 
