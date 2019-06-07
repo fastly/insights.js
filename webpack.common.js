@@ -2,6 +2,9 @@ const path = require('path');
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlApiTokenWebpackPlugin = require('./webpack.HtmlApiTokenWebpackPlugin.js');
+
+const DEV_API_TOKEN = "2e8a8c19-e1c6-4d68-9200-d6a894b39414";
 
 module.exports = {
   entry: './src/index.ts',
@@ -31,7 +34,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Insights.js',
       template: path.resolve(__dirname, 'src', 'index.html')
-    })
+    }),
+    new HtmlApiTokenWebpackPlugin({
+      apiToken: DEV_API_TOKEN
+    }),
   ],
   output: {
     library: 'FASTLY',
