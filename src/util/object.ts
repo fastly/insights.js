@@ -2,6 +2,7 @@
 // This is used instead of Object.prototype.hasOwnProperty() due to browser support
 // Accepts object path in dot notation form
 export function hasProperty(obj: any, propertyPath: string): boolean {
+  // TODO: this is the only place we use split(). can we avoid this?
   return propertyPath.split(".").every(
     (prop: string): boolean => {
       let hasProp: boolean;
