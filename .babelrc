@@ -8,7 +8,8 @@
                 debug: false,
                 exclude: [
                     "es.promise",
-                    "es.object.to-string"
+                    "es.object.to-string",
+                    "web.url"
                 ]
             }
         ],
