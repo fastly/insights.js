@@ -22,6 +22,9 @@ module.exports = merge(common, {
       }),
       new BundleAnalyzerPlugin({
          analyzerMode: 'static'
+      }),
+      new webpack.DefinePlugin({
+         PRODUCTION: 'true'
       })
    ],
    output: {

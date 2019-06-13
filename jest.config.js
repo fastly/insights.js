@@ -3,5 +3,8 @@ module.exports = {
   coverageDirectory: "coverage",
   moduleNameMapper: {
     "^workerize-loader": "<rootDir>/src/__mocks__/worker.ts"
+  },
+  globals: {
+    PRODUCTION: false
   }
 };
