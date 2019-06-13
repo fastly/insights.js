@@ -1,4 +1,4 @@
-type PromiseGenerator = <T>() => Promise<T>;
+// type PromiseGenerator = () => Promise<T>;
 
 const DEFAULT_RETRY_ATTEMPTS = 3;
 const DEFAULT_RETRY_DELAY = 100;
@@ -7,13 +7,13 @@ const wait = (delay: number): Promise<void> =>
   new Promise((resolve): number => setTimeout(resolve, delay));
 
 function retry<T>(
-  func: PromiseGenerator,
+  func: () => Promise<T>,
   times: number = DEFAULT_RETRY_ATTEMPTS,
   delay: number = DEFAULT_RETRY_DELAY
 ): Promise<T> {
-  return new Promise(
+  return new Promise<T>(
     (resolve, reject): void => {
-      func<T>()
+      func()
         .then(resolve)
         .catch(
           (err: Error): Promise<any> | void => {
