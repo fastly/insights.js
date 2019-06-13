@@ -2,6 +2,10 @@ interface FetchResponse {
   json(): Promise<any>;
 }
 
+interface QueryParameters {
+  [key: string]: string;
+}
+
 //  Server response
 // ---------------------------------------------------------------------------
 
