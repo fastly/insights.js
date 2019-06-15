@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/camelcase */
 const configFixture: Config = {
+  test: {
+    id: "42c91a26-c33f-482a-9ac9-353cd615c0a9"
+  },
   session:
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkMDBmZTliNi05MWM2LTQ0MzQtOGU3Ny0xNDYzMGUyNjNhMjYiLCJleHAiOjE1NTY3MDUxNjIsImlhdCI6MTU1NjcwNTEwM30.Pig3FCY94l2vIfBsIHAPsCzE2mgkGpXcbe0QKHPJcq4",
   hosts: {
@@ -19,8 +22,7 @@ const configFixture: Config = {
   },
   tasks: [
     {
-      name: "MAD",
-      id: "77d7es76-77ae-477a-7a33-7a7f7c162004",
+      id: "MAD",
       req_header: "",
       resource: "https://mad-v4.pops.test.fastly-insights.com/o.svg",
       resp_header: "",
@@ -28,8 +30,7 @@ const configFixture: Config = {
       weight: 3.23
     },
     {
-      name: "LCY",
-      id: "88271afb-88ae-4888-abca-8817aba9182a",
+      id: "LCY",
       req_header: "",
       resource: "https://lcy-v4.pops.test.fastly-insights.com/o.svg",
       resp_header: "",
@@ -37,8 +38,7 @@ const configFixture: Config = {
       weight: 1.01
     },
     {
-      name: "rtt",
-      id: "8a8100bc-9217-48a7-918f-81673da8a99f",
+      id: "rtt",
       req_header: "",
       resource: "https://www.fastly-insights.com/rtt.json",
       resp_header: "",

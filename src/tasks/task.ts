@@ -41,17 +41,17 @@ const blankBeacon: Beacon = {
 };
 /* eslint-enable @typescript-eslint/camelcase */
 
-class Task implements TaskInterface {
-  private config: Config;
-  private taskData: TaskData;
+abstract class Task implements TaskInterface {
+  protected config: Config;
+  protected data: TaskData;
   private beacon: Beacon;
   public state: State = { hasRan: false };
 
-  public constructor(config: Config, taskData: TaskData) {
+  public constructor(config: Config, data: TaskData) {
     // TODO: more strict typing here
     this.beacon = assign({}, blankBeacon);
     this.config = assign({}, config);
-    this.taskData = taskData;
+    this.data = data;
   }
 
   private encode(data: Beacon): string {
@@ -81,17 +81,17 @@ class Task implements TaskInterface {
     testResult: TestResult,
     clientInfo: ClientInfo
   ): Beacon {
-    const { settings, server } = this.config;
+    const { test, settings, server } = this.config;
     /* eslint-disable @typescript-eslint/camelcase */
     this.beacon = assign(
       {
-        test_id: settings.token,
-        test_api_key: this.config.settings.token,
+        test_id: test.id,
+        test_api_key: settings.token,
         test_lib_version: "<% VERSION %>",
         test_server: JSON.stringify(server),
         test_timestamp: Math.floor(Date.now() / 1000), // Unix timestamp in seconds
-        task_type: this.taskData.type,
-        task_id: this.taskData.id,
+        task_type: this.data.type,
+        task_id: this.data.id,
         task_schema_version: "0.0.0",
         task_client_data: JSON.stringify(testResult),
         task_server_data: "<% SERVER_DATA %>"
@@ -105,22 +105,21 @@ class Task implements TaskInterface {
   /**
    * ABSTRACT TEST METHOD
    */
-  private test(): Promise<TestResult> {
-    const mockOutput = { value: `test run ${this.taskData.id}` };
-    return Promise.resolve(mockOutput);
-  }
+  protected abstract test(): Promise<any>;
 
-  public execute(): Promise<any> {
+  public execute(): Promise<Beacon> {
     const lookup = this.config.hosts.lookup;
     const testId = this.config.settings.token;
     const clientInfoUrl = `https://${testId}.${lookup}/l`;
     return Promise.all([this.test(), getClientInfo(clientInfoUrl)])
-      .then((runAndClientInfo): any => this.generateBeacon(...runAndClientInfo))
+      .then(
+        (runAndClientInfo): Beacon => this.generateBeacon(...runAndClientInfo)
+      )
       .then(this.encode)
-      .then((encodedBeacon): void => this.send(encodedBeacon))
+      .then(this.send)
       .then((): Beacon => this.beacon) // Clean up return data
       .catch(
-        (): Promise<any> => {
+        (): Promise<Beacon> => {
           //TODO: do something better than swallowing the error
           return Promise.resolve(this.beacon);
         }
