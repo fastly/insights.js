@@ -28,7 +28,7 @@ describe("worker", (): void => {
           for (let i = 0; i < beacons.length; i++) {
             const beacon = beacons[i];
             const task = configFixture.tasks[i];
-            expect(beacon.task_id).toEqual(task.id)
+            expect(beacon.task_id).toEqual(task.id);
           }
         }
       );

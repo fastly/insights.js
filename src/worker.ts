@@ -1,32 +1,25 @@
 import "unfetch/polyfill";
 import { CONFIG_URL } from "./constants";
+import chooseRandomTasks from "./lib/chooseRandomTasks";
 import retry from "./util/promiseRetry";
-import Fetch from "./tasks/fetch";
-import Pop from "./tasks/pop";
+import sequence from "./util/promiseSequence";
+import { create as createTask } from "./tasks";
 import Task from "./tasks/task";
 
-interface TaskLookup {
-  [key: string]: typeof Task;
-}
-
-const TASK_LOOKUP: TaskLookup = {
-  pop: Pop,
-  fetch: Fetch
-};
-
 function runTasks(configuration: Config): Promise<Beacon[]> {
-  const promises = configuration.tasks.map(
-    (taskData): Promise<Beacon> => {
-      const TaskClass = TASK_LOOKUP[taskData.type];
-      if (TaskClass) {
-        const task = new TaskClass(configuration, taskData);
-        return task.execute();
-      }
-      return Promise.reject(`Unknown task type: ${taskData.type}`);
-    }
+  const {
+    settings: { max_tasks: maxTasks },
+    tasks
+  } = configuration;
+  const selectedTasks = chooseRandomTasks(tasks, maxTasks);
+  const hydratedTasks = selectedTasks.map(
+    (taskData): Task => createTask(configuration, taskData)
+  );
+  const taskQueue = hydratedTasks.map(
+    (task): (() => Promise<Beacon>) => (): Promise<Beacon> => task.execute()
   );
 
-  return Promise.all(promises);
+  return sequence(taskQueue);
 }
 
 function getConfig(url: string): Promise<Config> {
