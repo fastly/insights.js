@@ -11,7 +11,7 @@
     "test": "npm run test:once && npm run lint",
     "test:once": "jest --coverage",
     "test:watch": "jest --watch",
-    "start": "webpack-dev-server --progress --open --config webpack.dev.js",
+    "start": "webpack-dev-server --progress --open --config webpack.dev.js --host 0.0.0.0",
     "build": "webpack --config webpack.prod.js",
     "build:dev": "webpack --config webpack.dev.js",
     "lint": "tsc --noEmit && eslint '*/**/*.ts' --fix"
@@ -42,15 +42,17 @@
     "nock": "^10.0.6",
     "prettier": "^1.17.1",
     "typescript": "^3.4.5",
+    "unfetch": "^4.1.0",
     "webpack": "^4.32.2",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.4.1",
     "webpack-merge": "^4.2.1",
-    "workerize-loader": "^1.0.4",
-    "unfetch": "^4.1.0"
+    "workerize-loader": "^1.0.4"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@fastly/performance-observer-polyfill": "^1.0.2"
+  },
   "husky": {
     "hooks": {
       "pre-push": "npm test"
