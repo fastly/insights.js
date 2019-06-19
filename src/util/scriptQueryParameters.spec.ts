@@ -7,7 +7,9 @@ function createScriptElement(src: string): void {
 }
 
 function removeScriptElement(src: string): void {
-  const scripts: Element[] = [...document.getElementsByTagName("script")];
+  const scripts: Element[] = [].slice.call(
+    document.getElementsByTagName("script")
+  );
   const script: Element | undefined = scripts.find(
     (s): boolean => s.getAttribute("src") === src
   );
