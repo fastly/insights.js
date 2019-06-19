@@ -104,4 +104,8 @@ interface TestResult {
   [key: string]: any;
 }
 
+interface ResourceTimingEntry {
+  [key: string]: string | number;
+}
+
 type Beacon = ClientInfo & TaskResult;
