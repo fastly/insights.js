@@ -48,7 +48,6 @@ abstract class Task implements TaskInterface {
   public state: State = { hasRan: false };
 
   public constructor(config: Config, data: TaskData) {
-    // TODO: more strict typing here
     this.beacon = assign({}, blankBeacon);
     this.config = assign({}, config);
     this.data = data;
@@ -115,8 +114,8 @@ abstract class Task implements TaskInterface {
       .then(
         (runAndClientInfo): Beacon => this.generateBeacon(...runAndClientInfo)
       )
-      .then(this.encode)
-      .then(this.send)
+      .then((data): string => this.encode(data))
+      .then((data): void => this.send(data))
       .then((): Beacon => this.beacon) // Clean up return data
       .catch(
         (): Promise<Beacon> => {
