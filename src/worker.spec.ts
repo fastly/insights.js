@@ -12,6 +12,7 @@ describe("worker", (): void => {
   describe("init", (): void => {
     it("should eventually return an array of Beacons", (): Promise<void> => {
       const { k: token } = queryParametersFixture;
+      const { session } = configFixture;
 
       nock(`https://${token}.eu.u.test.fastly-insights.com`)
         .defaultReplyHeaders({ "access-control-allow-origin": "*" })
@@ -22,6 +23,35 @@ describe("worker", (): void => {
         .defaultReplyHeaders({ "access-control-allow-origin": "*" })
         .get(CONFIG_PATH + token)
         .reply(200, configFixture);
+
+      nock(CONFIG_HOST)
+        .defaultReplyHeaders({
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "OPTIONS, POST"
+        })
+        .intercept(`/b`, "OPTIONS")
+        .times(20)
+        .query({ k: token, s: session })
+        .reply(200);
+
+      nock(CONFIG_HOST)
+        .defaultReplyHeaders({
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "*"
+        })
+        .post(`/b`)
+        .times(20)
+        .query({ k: token, s: session })
+        .reply(204);
+
+      nock(/.*/)
+        .defaultReplyHeaders({
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "*"
+        })
+        .get(/.*/)
+        .times(20)
+        .reply(200);
 
       return init(queryParametersFixture).then(
         (beacons: Beacon[]): void => {
