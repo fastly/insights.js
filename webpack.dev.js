@@ -19,6 +19,7 @@ module.exports = merge(common, {
     })
   ],
   output: {
-    globalObject: 'this'
+    globalObject: 'this',
+    publicPath: 'http://0.0.0.0:8000/'
   }
 });
