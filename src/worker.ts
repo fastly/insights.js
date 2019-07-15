@@ -1,5 +1,6 @@
 import "unfetch/polyfill";
 import { CONFIG_URL } from "./constants";
+import retry from "./util/promiseRetry";
 import Fetch from "./tasks/fetch";
 import Pop from "./tasks/pop";
 import Task from "./tasks/task";
@@ -24,16 +25,19 @@ function runTasks(configuration: Config): Promise<Beacon[]> {
       return Promise.reject(`Unknown task type: ${taskData.type}`);
     }
   );
+
   return Promise.all(promises);
 }
 
-export function init(): Promise<Beacon[]> {
-  return fetch(CONFIG_URL)
-    .then(
-      (res: FetchResponse): Promise<Config> => res.json() as Promise<Config>
-    )
-    .then(
-      (configuration: Config): Promise<Beacon[]> => runTasks(configuration)
-    );
+function getConfig(url: string): Promise<Config> {
+  const toJSON = (res: FetchResponse): Promise<Config> =>
+    res.json() as Promise<Config>;
+  const fetchJSON = (): Promise<Config> => fetch(url).then(toJSON);
+  return retry(fetchJSON);
+}
+
+export function init({ k: apiToken }: QueryParameters): Promise<Beacon[]> {
+  const configUrl = `${CONFIG_URL}${apiToken}`;
+  return getConfig(configUrl).then(runTasks);
   // TODO: deal with errors
 }

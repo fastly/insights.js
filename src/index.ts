@@ -1,5 +1,7 @@
+import { SCRIPT_SRC_REGEXP } from "./constants";
 import { hasProperties } from "./util/object";
 import loadWhenDocumentReady from "./util/loadWhenDocumentReady";
+import getScriptParameters from "./util/scriptQueryParameters";
 import Worker from "workerize-loader!./worker";
 
 // List of required features browser features
@@ -18,8 +20,9 @@ const state: Fastly = {
 export function init(): void {
   loadWhenDocumentReady(
     (): void => {
+      const params = getScriptParameters(SCRIPT_SRC_REGEXP);
       const worker = new Worker();
-      worker.init();
+      worker.init(params);
     }
   );
 }
