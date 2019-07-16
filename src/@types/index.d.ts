@@ -9,6 +9,10 @@ interface QueryParameters {
 //  Server response
 // ---------------------------------------------------------------------------
 
+interface Test {
+  id: string;
+}
+
 interface Client {
   hasFeatureSupport: boolean;
 }
@@ -37,16 +41,16 @@ interface Server {
 // Config/tasks
 // ---------------------------------------------------------------------------
 interface TaskData {
-  name: string;
+  id: string;
   req_header: string;
   resource: string;
   resp_header: string;
   type: string;
-  id: string; // I am assuming this comes from the server?
   weight: number;
 }
 
 interface Config {
+  test: Test;
   session: string;
   hosts: Host;
   settings: Settings;
@@ -55,7 +59,7 @@ interface Config {
 }
 
 interface TaskInterface {
-  execute(): Promise<any>;
+  execute(): Promise<Beacon>;
 }
 
 // Result / ClientInfo / Beacon
@@ -98,6 +102,10 @@ interface TaskResult {
 
 interface TestResult {
   [key: string]: any;
+}
+
+interface ResourceTimingEntry {
+  [key: string]: string | number;
 }
 
 type Beacon = ClientInfo & TaskResult;

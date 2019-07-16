@@ -10,7 +10,10 @@
     "declaration": true,
     "target": "esnext",
     "module": "commonjs",
-    "noEmit": true
+    "noEmit": true,
+    "lib": [
+      "dom"
+    ]
   },
   "include": [
     "src/**/*"

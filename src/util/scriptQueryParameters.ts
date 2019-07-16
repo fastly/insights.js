@@ -8,21 +8,18 @@ export default function getParameters(srcRegExp: RegExp): QueryParameters {
     .filter(elementHasSource)
     .find((s): boolean => !!getSrc(s).match(srcRegExp));
 
-  let result: QueryParameters = {};
+  const result: QueryParameters = {};
 
   if (script) {
     const src = getSrc(script);
     const url = new URL(src);
 
-    result = Array.from(url.searchParams.entries()).reduce(
-      (
-        res: QueryParameters,
-        [key, value]: [string, string]
-      ): QueryParameters => {
-        res[key] = value;
-        return res;
-      },
-      {}
+    // We can't use url.searchParams.entries().reduce() here as lib.d.ts
+    // doesn't declare the entries iterable type on the object :(
+    url.searchParams.forEach(
+      (value: string, key: string): void => {
+        result[key] = value;
+      }
     );
   }
 
