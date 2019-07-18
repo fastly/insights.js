@@ -5,6 +5,7 @@ module.exports = {
     "^workerize-loader": "<rootDir>/src/__mocks__/worker.ts"
   },
   globals: {
-    PRODUCTION: false
+    PRODUCTION: false,
+    VERSION: "0.0.0"
   }
 };

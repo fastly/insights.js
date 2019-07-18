@@ -15,7 +15,8 @@ module.exports = merge(common, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      PRODUCTION: 'false'
+      PRODUCTION: 'false',
+      VERSION: '0.0.0.'
     })
   ],
   output: {

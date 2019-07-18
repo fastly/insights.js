@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
+const version = require('./package.json').version;
 
 function getLicenseWithDate() {
    const license = fs.readFileSync(path.resolve(__dirname, 'LICENSE'), { encoding: 'utf8'});
@@ -24,7 +25,8 @@ module.exports = merge(common, {
          analyzerMode: 'static'
       }),
       new webpack.DefinePlugin({
-         PRODUCTION: 'true'
+         PRODUCTION: 'true',
+         VERSION: JSON.stringify(version)
       })
    ],
    output: {
