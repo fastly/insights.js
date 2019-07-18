@@ -3,6 +3,7 @@ const path = require('path');
 
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const AssetsPlugin = require('assets-webpack-plugin');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const version = require('./package.json').version;
@@ -13,6 +14,14 @@ function getLicenseWithDate() {
    const year = new Date(now).getFullYear();
    const date = new Date(now).toISOString();
    return license.replace('[year]', year).replace('[date]', date);
+}
+
+function processManifest(assets) {
+   return JSON.stringify(Object.entries(assets).reduce((res, [key , value]) => {
+      if(key === "main") res["insights.js"] = value.js;
+      if(key === "") res["worker.js"] = value.js;
+      return res;
+   }, {}));
 }
 
 module.exports = merge(common, {
@@ -27,6 +36,13 @@ module.exports = merge(common, {
       new webpack.DefinePlugin({
          PRODUCTION: 'true',
          VERSION: JSON.stringify(version)
+      }),
+      new AssetsPlugin({
+         filename: 'manifest.json',
+         useCompilerPath: true,
+         includeAllFileTypes: false,
+         fileTypes: ['js'],
+         processOutput: processManifest
       })
    ],
    output: {
