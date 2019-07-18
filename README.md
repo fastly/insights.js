@@ -33,7 +33,10 @@ Name                   | Description
 build | Compiles the application for production environments
 build:dev | Compiles the application for development
 lint | Lints the source files for style errors using ESLint and automatically formats the source files using prettier
-test | Runs the unit test suite
+test | Runs the linting and unit test suite
+test:once | Runs the unit test suite once with coverage output
+test:watch | Runs the unit test suite in watch mode
+start | Runs the development server in watch mode
 
 
 ## FAQ
