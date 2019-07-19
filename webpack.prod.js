@@ -39,7 +39,6 @@ module.exports = merge(common, {
       }),
       new AssetsPlugin({
          filename: 'manifest.json',
-         fullPath: false,
          useCompilerPath: true,
          includeAllFileTypes: false,
          fileTypes: ['js'],
