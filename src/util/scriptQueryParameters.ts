@@ -14,6 +14,9 @@ export default function getParameters(srcRegExp: RegExp): QueryParameters {
     const src = getSrc(script);
     const url = new URL(src);
 
+    // Also return the full hostname so we can use for configuration.
+    result.host = url.origin;
+
     // We can't use url.searchParams.entries().reduce() here as lib.d.ts
     // doesn't declare the entries iterable type on the object :(
     url.searchParams.forEach(
