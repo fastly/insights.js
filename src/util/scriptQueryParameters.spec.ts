@@ -30,7 +30,8 @@ describe("scriptQueryParameters", (): void => {
         src: "https://test.com/path?foo=bar",
         matcher: /test\.com/,
         expected: {
-          foo: "bar"
+          foo: "bar",
+          host: "https://test.com"
         }
       },
       {
@@ -38,7 +39,8 @@ describe("scriptQueryParameters", (): void => {
         matcher: /test\.com/,
         expected: {
           foo: "bar",
-          baz: "qux qaz"
+          baz: "qux qaz",
+          host: "https://test.com"
         }
       }
     ];
