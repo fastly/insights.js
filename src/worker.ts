@@ -37,5 +37,12 @@ export function init({
 }: QueryParameters): Promise<Beacon[]> {
   const configHost = PRODUCTION ? host : "https://test.fastly-insights.com";
   const configUrl = `${configHost}${CONFIG_PATH}${apiToken}`;
-  return getConfig(configUrl).then(runTasks);
+  return getConfig(configUrl)
+    .then(runTasks)
+    .catch(
+      (): Promise<Beacon[]> => {
+        // TODO: deal with errors
+        return Promise.resolve([]);
+      }
+    );
 }
