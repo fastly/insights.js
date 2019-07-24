@@ -1,5 +1,5 @@
 import state, { init } from "./index";
-import Worker from "workerize-loader!./worker";
+import Worker from "workerize-loader?inline!./worker";
 
 const mockInit = jest.fn();
 jest.mock(

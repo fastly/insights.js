@@ -2,7 +2,7 @@ import { SCRIPT_SRC_REGEXP } from "./constants";
 import { hasProperties } from "./util/object";
 import loadWhenDocumentReady from "./util/loadWhenDocumentReady";
 import getScriptParameters from "./util/scriptQueryParameters";
-import Worker from "workerize-loader!./worker";
+import Worker from "workerize-loader?inline!./worker";
 
 // List of required features browser features
 const requiredFeatures = ["Worker", "Promise", "fetch"];
