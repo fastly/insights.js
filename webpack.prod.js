@@ -46,6 +46,6 @@ module.exports = merge(common, {
       })
    ],
    output: {
-    publicPath: '/static/'
+      publicPath: 'https://www.fastly-insights.com/static/'
    }
 });
