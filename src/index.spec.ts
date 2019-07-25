@@ -1,23 +1,12 @@
 import state, { init } from "./index";
-import Worker from "workerize-loader!./worker";
+import * as worker from "./worker";
 
-const mockInit = jest.fn();
-jest.mock(
-  "workerize-loader!./worker",
-  (): jest.Mock => {
-    return jest.fn().mockImplementation(
-      (): any => {
-        return { init: mockInit };
-      }
-    );
-  }
-);
+jest.mock("./worker");
 
 describe("index", (): void => {
   beforeAll(
     (): void => {
-      (Worker as jest.Mock).mockClear();
-      mockInit.mockClear();
+      (worker.init as jest.Mock).mockClear();
     }
   );
 
@@ -35,8 +24,7 @@ describe("index", (): void => {
   describe("init", (): void => {
     it("should invoke the woker init method when ready", (): void => {
       init();
-      expect(Worker).toHaveBeenCalled();
-      expect(mockInit).toHaveBeenCalled();
+      expect(worker.init).toHaveBeenCalled();
     });
   });
 });

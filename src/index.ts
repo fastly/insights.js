@@ -2,7 +2,7 @@ import { SCRIPT_SRC_REGEXP } from "./constants";
 import { hasProperties } from "./util/object";
 import loadWhenDocumentReady from "./util/loadWhenDocumentReady";
 import getScriptParameters from "./util/scriptQueryParameters";
-import Worker from "workerize-loader!./worker";
+import * as worker from "./worker";
 
 // List of required features browser features
 const requiredFeatures = ["Worker", "Promise", "fetch"];
@@ -21,8 +21,7 @@ export function init(): void {
   loadWhenDocumentReady(
     (): void => {
       const params = getScriptParameters(SCRIPT_SRC_REGEXP);
-      const worker = new Worker();
-      worker.init(params);
+      worker.init(params).catch((): void => {});
     }
   );
 }

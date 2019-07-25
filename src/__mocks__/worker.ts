@@ -1,4 +1,3 @@
-export default class Worker {
-  public constructor() {}
-  public init(): void {}
-}
+const init = jest.fn().mockReturnValue(Promise.resolve());
+
+export { init };
