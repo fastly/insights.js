@@ -31,6 +31,12 @@ function getConfig(url: string): Promise<Config> {
 
 export function init({ k: apiToken }: QueryParameters): Promise<Beacon[]> {
   const configUrl = `${CONFIG_URL}${apiToken}`;
-  return getConfig(configUrl).then(runTasks);
-  // TODO: deal with errors
+  return getConfig(configUrl)
+    .then(runTasks)
+    .catch(
+      (): Beacon[] => {
+        // TODO: deal with errors
+        return [];
+      }
+    );
 }
