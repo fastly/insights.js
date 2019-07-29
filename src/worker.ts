@@ -1,10 +1,13 @@
 import "unfetch/polyfill";
-import { CONFIG_URL } from "./constants";
+import { CONFIG_PATH } from "./constants";
 import chooseRandomTasks from "./lib/chooseRandomTasks";
 import retry from "./util/promiseRetry";
 import sequence from "./util/promiseSequence";
 import { create as createTask } from "./tasks";
 import Task from "./tasks/task";
+
+// This is declared via Webpack DefinePlugin at compile time
+declare const PRODUCTION: boolean;
 
 function runTasks(configuration: Config): Promise<Beacon[]> {
   const {
@@ -29,8 +32,12 @@ function getConfig(url: string): Promise<Config> {
   return retry(fetchJSON);
 }
 
-export function init({ k: apiToken }: QueryParameters): Promise<Beacon[]> {
-  const configUrl = `${CONFIG_URL}${apiToken}`;
+export function init({
+  host,
+  k: apiToken
+}: QueryParameters): Promise<Beacon[]> {
+  const configHost = PRODUCTION ? host : "https://test.fastly-insights.com";
+  const configUrl = `${configHost}${CONFIG_PATH}${apiToken}`;
   return getConfig(configUrl)
     .then(runTasks)
     .catch(
