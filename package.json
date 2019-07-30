@@ -1,11 +1,16 @@
 {
-  "name": "insights.js",
-  "version": "2.0.0",
-  "main": "dist/lib.js",
+  "name": "@fastly/insights.js",
+  "version": "0.0.0",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/fastly/insights.js.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "test": "npm run test:once && npm run lint",
@@ -14,7 +19,9 @@
     "start": "webpack-dev-server --progress --open --config webpack.dev.js --host 0.0.0.0",
     "build": "webpack --config webpack.prod.js",
     "build:dev": "webpack --config webpack.dev.js",
-    "lint": "tsc --noEmit && eslint '*/**/*.ts' --fix"
+    "lint": "tsc --noEmit && eslint '*/**/*.ts' --fix",
+    "release": "npx np",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

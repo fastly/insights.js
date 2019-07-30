@@ -5,6 +5,8 @@ import { getClientInfo } from "../util/client-info";
 interface State {
   hasRan: boolean;
 }
+// The VERSION var is replaced at compile time via webpack.DefinePlugin
+declare const VERSION: string;
 
 /* eslint-disable @typescript-eslint/camelcase */
 const blankBeacon: Beacon = {
@@ -86,7 +88,7 @@ abstract class Task implements TaskInterface {
       {
         test_id: test.id,
         test_api_key: settings.token,
-        test_lib_version: "<% VERSION %>",
+        test_lib_version: VERSION,
         test_server: JSON.stringify(server),
         test_timestamp: Math.floor(Date.now() / 1000), // Unix timestamp in seconds
         task_type: this.data.type,
