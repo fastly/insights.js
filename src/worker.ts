@@ -1,6 +1,7 @@
 import "unfetch/polyfill";
 import { CONFIG_PATH } from "./constants";
 import chooseRandomTasks from "./lib/chooseRandomTasks";
+import filterTasksByClientClassification from "./lib/filterTasksByClientClassification";
 import retry from "./util/promiseRetry";
 import sequence from "./util/promiseSequence";
 import { create as createTask } from "./tasks";
@@ -11,10 +12,12 @@ declare const PRODUCTION: boolean;
 
 function runTasks(configuration: Config): Promise<Beacon[]> {
   const {
+    client,
     settings: { max_tasks: maxTasks },
     tasks
   } = configuration;
-  const selectedTasks = chooseRandomTasks(tasks, maxTasks);
+  const possibleTasks = filterTasksByClientClassification(tasks, client);
+  const selectedTasks = chooseRandomTasks(possibleTasks, maxTasks);
   const hydratedTasks = selectedTasks.map(
     (taskData): Task => createTask(configuration, taskData)
   );
