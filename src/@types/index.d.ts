@@ -6,6 +6,13 @@ interface QueryParameters {
   [key: string]: string;
 }
 
+//  Classifiers
+// ---------------------------------------------------------------------------
+type CountryCode = string;
+type ASN = number;
+type ConnectionType = string;
+type DeviceType = string;
+
 //  Server response
 // ---------------------------------------------------------------------------
 
@@ -13,12 +20,20 @@ interface Test {
   id: string;
 }
 
-interface Client {
+interface Agent {
   hasFeatureSupport: boolean;
 }
 
+interface Client {
+  country_code: CountryCode;
+  connection_type: ConnectionType;
+  asn: ASN;
+  device_type: DeviceType;
+  [key: string]: string | number;
+}
+
 interface Fastly {
-  client: Client;
+  client: Agent;
 }
 
 interface Host {
@@ -40,6 +55,14 @@ interface Server {
 
 // Config/tasks
 // ---------------------------------------------------------------------------
+interface TaskClassification {
+  country_code?: CountryCode[];
+  asn?: ASN[];
+  connection_type?: ConnectionType[];
+  device_type?: DeviceType[];
+  [key: string]: string[] | number[] | undefined;
+}
+
 interface TaskData {
   id: string;
   req_header: string;
@@ -47,15 +70,17 @@ interface TaskData {
   resp_header: string;
   type: string;
   weight: number;
+  classification: TaskClassification;
 }
 
 interface Config {
-  test: Test;
-  session: string;
+  client: Client;
   hosts: Host;
-  settings: Settings;
   server: Server;
+  session: string;
+  settings: Settings;
   tasks: TaskData[];
+  test: Test;
 }
 
 interface TaskInterface {

@@ -17,6 +17,12 @@ const configFixture: Config = {
     sample_rate: 0.4,
     token: "d00fe9b6-91c6-4434-8e77-14630e263a26"
   },
+  client: {
+    country_code: "GB",
+    asn: 5089,
+    connection_type: "broadband",
+    device_type: "unknown"
+  },
   server: {
     datacenter: "LCY"
   },
@@ -27,7 +33,8 @@ const configFixture: Config = {
       resource: "https://mad-v4.pops.test.fastly-insights.com/o.svg",
       resp_header: "",
       type: "pop",
-      weight: 3.23
+      weight: 3.23,
+      classification: {}
     },
     {
       id: "LCY",
@@ -35,7 +42,8 @@ const configFixture: Config = {
       resource: "https://lcy-v4.pops.test.fastly-insights.com/o.svg",
       resp_header: "",
       type: "pop",
-      weight: 1.01
+      weight: 1.01,
+      classification: {}
     },
     {
       id: "rtt",
@@ -43,7 +51,8 @@ const configFixture: Config = {
       resource: "https://www.fastly-insights.com/rtt.json",
       resp_header: "",
       type: "fetch",
-      weight: 1
+      weight: 1,
+      classification: {}
     }
   ]
 };
