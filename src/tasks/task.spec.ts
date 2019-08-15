@@ -29,7 +29,8 @@ describe("task", (): void => {
         expect(result.client_ip).toEqual("1.2.3.4");
         expect(result.client_asn).toEqual(10225);
         expect(result.resolver_asn).toEqual(33);
-        const expectedValue = { id: config.tasks[0].id };
+        /* eslint-disable @typescript-eslint/camelcase */
+        const expectedValue = { client_connection: {}, id: config.tasks[0].id };
         expect(result.task_client_data).toEqual(JSON.stringify(expectedValue));
       });
     });

@@ -2,6 +2,7 @@ import assign from "../util/assign";
 import { beacon } from "../util/beacon";
 import { getClientInfo } from "../util/client-info";
 import templateResource from "../lib/templateResource";
+import getNetworkInformation from "../lib/networkInformation";
 
 interface State {
   hasRan: boolean;
@@ -85,7 +86,12 @@ abstract class Task implements TaskInterface {
     clientInfo: ClientInfo
   ): Beacon {
     const { test, settings, server } = this.config;
+    const networkInformation = getNetworkInformation();
     /* eslint-disable @typescript-eslint/camelcase */
+    const result = assign(
+      { client_connection: networkInformation },
+      testResult
+    );
     this.beacon = assign(
       {
         test_id: test.id,
@@ -96,7 +102,7 @@ abstract class Task implements TaskInterface {
         task_type: this.data.type,
         task_id: this.data.id,
         task_schema_version: "0.0.0",
-        task_client_data: JSON.stringify(testResult),
+        task_client_data: JSON.stringify(result),
         task_server_data: "<% SERVER_DATA %>"
       },
       clientInfo
