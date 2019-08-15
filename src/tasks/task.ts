@@ -1,6 +1,7 @@
 import assign from "../util/assign";
 import { beacon } from "../util/beacon";
 import { getClientInfo } from "../util/client-info";
+import templateResource from "../lib/templateResource";
 
 interface State {
   hasRan: boolean;
@@ -53,6 +54,7 @@ abstract class Task implements TaskInterface {
     this.beacon = assign({}, blankBeacon);
     this.config = assign({}, config);
     this.data = data;
+    this.data.resource = templateResource(this.data.resource, config);
   }
 
   private encode(data: Beacon): string {
