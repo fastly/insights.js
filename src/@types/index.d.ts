@@ -34,6 +34,7 @@ interface Client {
 
 interface Fastly {
   client: Agent;
+  results: Beacon[];
 }
 
 interface Host {
