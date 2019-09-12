@@ -16,8 +16,8 @@ class MockDerviedClass extends Task {
 describe("task", (): void => {
   describe("#execute", (): void => {
     it("should eventually return a Beacon", (): Promise<void> => {
-      const token = configFixture.settings.token;
-      nock(`https://${token}.eu.u.test.fastly-insights.com`)
+      const testId = configFixture.test.id;
+      nock(`https://${testId}.eu.u.test.fastly-insights.com`)
         .defaultReplyHeaders({ "access-control-allow-origin": "*" })
         .get("/l")
         .reply(200, clientInfoFixture);

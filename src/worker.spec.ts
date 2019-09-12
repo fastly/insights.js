@@ -12,9 +12,9 @@ describe("worker", (): void => {
   describe("init", (): void => {
     it("should eventually return an array of Beacons", (): Promise<void> => {
       const { k: token } = queryParametersFixture;
-      const { session } = configFixture;
+      const { session, test } = configFixture;
 
-      nock(`https://${token}.eu.u.test.fastly-insights.com`)
+      nock(`https://${test.id}.eu.u.test.fastly-insights.com`)
         .defaultReplyHeaders({ "access-control-allow-origin": "*" })
         .get("/l")
         .reply(200, clientInfoFixture);

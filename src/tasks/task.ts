@@ -112,7 +112,7 @@ abstract class Task implements TaskInterface {
 
   public execute(): Promise<Beacon> {
     const lookup = this.config.hosts.lookup;
-    const testId = this.config.settings.token;
+    const testId = this.config.test.id;
     const clientInfoUrl = `https://${testId}.${lookup}/l`;
     return Promise.all([this.test(), getClientInfo(clientInfoUrl)])
       .then(
