@@ -31,7 +31,7 @@ function asyncGetEntry(
           observer: PerformanceObserver
         ): void => {
           const namedEntries = list.getEntriesByName(name);
-          entry = namedEntries.shift();
+          entry = namedEntries.pop();
 
           if (entry) {
             observer.disconnect();
