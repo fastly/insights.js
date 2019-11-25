@@ -24,11 +24,9 @@ describe("promiseRetry", (): void => {
       .then((): void => {})
       .then((): typeof jest => jest.runAllTimers());
 
-    return retry(mockFunc, 4, 0).then(
-      (result): void => {
-        expect(result).toEqual(true);
-      }
-    );
+    return retry(mockFunc, 4, 0).then((result): void => {
+      expect(result).toEqual(true);
+    });
   });
 
   it("should delay the retry by the supplied amount of time", (): Promise<
@@ -46,10 +44,8 @@ describe("promiseRetry", (): void => {
       .then((): void => {})
       .then((): typeof jest => jest.advanceTimersByTime(delayFixture));
 
-    return retry(mockFunc, 2, delayFixture).then(
-      (result): void => {
-        expect(result).toEqual(true);
-      }
-    );
+    return retry(mockFunc, 2, delayFixture).then((result): void => {
+      expect(result).toEqual(true);
+    });
   });
 });

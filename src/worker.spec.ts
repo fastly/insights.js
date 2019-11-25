@@ -53,15 +53,13 @@ describe("worker", (): void => {
         .times(20)
         .reply(200);
 
-      return init(queryParametersFixture).then(
-        (beacons: Beacon[]): void => {
-          for (let i = 0; i < beacons.length; i++) {
-            const beacon = beacons[i];
-            const task = configFixture.tasks[i];
-            expect(beacon.task_id).toEqual(task.id);
-          }
+      return init(queryParametersFixture).then((beacons: Beacon[]): void => {
+        for (let i = 0; i < beacons.length; i++) {
+          const beacon = beacons[i];
+          const task = configFixture.tasks[i];
+          expect(beacon.task_id).toEqual(task.id);
         }
-      );
+      });
     });
   });
 });

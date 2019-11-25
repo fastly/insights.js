@@ -34,23 +34,19 @@ describe("promiseSequence", (): void => {
           return Promise.resolve();
         }
       )
-      .then(
-        (): void => {
-          expect(mockFuncOne).toHaveBeenCalledTimes(1);
-          expect(mockFuncTwo).toHaveBeenCalledTimes(1);
-          expect(mockFuncThree).toHaveBeenCalledTimes(1);
-        }
-      )
+      .then((): void => {
+        expect(mockFuncOne).toHaveBeenCalledTimes(1);
+        expect(mockFuncTwo).toHaveBeenCalledTimes(1);
+        expect(mockFuncThree).toHaveBeenCalledTimes(1);
+      })
       .then(
         (): Promise<any> => {
           return result;
         }
       )
-      .then(
-        (results): void => {
-          expect(results).toEqual([1, 2, 3]);
-        }
-      );
+      .then((results): void => {
+        expect(results).toEqual([1, 2, 3]);
+      });
   });
 
   it("should continue the sequencing if a promise fails", (): Promise<void> => {
@@ -62,10 +58,8 @@ describe("promiseSequence", (): void => {
 
     const result = sequence(fixture);
 
-    return result.then(
-      (results): void => {
-        expect(results).toEqual([1, 3]);
-      }
-    );
+    return result.then((results): void => {
+      expect(results).toEqual([1, 3]);
+    });
   });
 });

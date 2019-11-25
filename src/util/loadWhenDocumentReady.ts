@@ -7,12 +7,9 @@ export default function loadWhenReady(fn: () => void): void {
   }
 
   // Otherwise, attach event listener to invoke when ready
-  document.addEventListener(
-    "readystatechange",
-    (): void => {
-      if (document.readyState === "complete") {
-        fn();
-      }
+  document.addEventListener("readystatechange", (): void => {
+    if (document.readyState === "complete") {
+      fn();
     }
-  );
+  });
 }

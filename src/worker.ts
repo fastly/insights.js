@@ -21,9 +21,9 @@ function runTasks(configuration: Config): Promise<Beacon[]> {
   const hydratedTasks = selectedTasks.map(
     (taskData): Task => createTask(configuration, taskData)
   );
-  const taskQueue = hydratedTasks.map(
-    (task): (() => Promise<Beacon>) => (): Promise<Beacon> => task.execute()
-  );
+  const taskQueue = hydratedTasks.map((task): (() => Promise<
+    Beacon
+  >) => (): Promise<Beacon> => task.execute());
 
   return sequence(taskQueue);
 }
@@ -43,10 +43,8 @@ export function init({
   const configUrl = `${configHost}${CONFIG_PATH}${apiToken}`;
   return getConfig(configUrl)
     .then(runTasks)
-    .catch(
-      (): Beacon[] => {
-        // TODO: deal with errors
-        return [];
-      }
-    );
+    .catch((): Beacon[] => {
+      // TODO: deal with errors
+      return [];
+    });
 }

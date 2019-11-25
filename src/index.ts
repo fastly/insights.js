@@ -28,21 +28,17 @@ const state: Fastly = {
 
 // Init initializes the library when the browser is ready
 export function init(): void {
-  loadWhenDocumentReady(
-    (): void => {
-      const params = getScriptParameters(SCRIPT_SRC_REGEXP);
-      worker
-        .init(params)
-        .then(
-          (results: Beacon[]): void => {
-            // We use apply here as we don't want to directly assign i.e.
-            // replace the existing results array.
-            Array.prototype.push.apply(state.results, results);
-          }
-        )
-        .catch((): void => {});
-    }
-  );
+  loadWhenDocumentReady((): void => {
+    const params = getScriptParameters(SCRIPT_SRC_REGEXP);
+    worker
+      .init(params)
+      .then((results: Beacon[]): void => {
+        // We use apply here as we don't want to directly assign i.e.
+        // replace the existing results array.
+        Array.prototype.push.apply(state.results, results);
+      })
+      .catch((): void => {});
+  });
 }
 
 // If browser has feature support,

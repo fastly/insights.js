@@ -4,11 +4,9 @@ import * as worker from "./worker";
 jest.mock("./worker");
 
 describe("index", (): void => {
-  beforeAll(
-    (): void => {
-      (worker.init as jest.Mock).mockClear();
-    }
-  );
+  beforeAll((): void => {
+    (worker.init as jest.Mock).mockClear();
+  });
 
   describe("state", (): void => {
     it("should return global state as default export", (): void => {
