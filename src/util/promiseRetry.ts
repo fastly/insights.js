@@ -11,23 +11,19 @@ function retry<T>(
   times: number = DEFAULT_RETRY_ATTEMPTS,
   delay: number = DEFAULT_RETRY_DELAY
 ): Promise<T> {
-  return new Promise<T>(
-    (resolve, reject): void => {
-      func()
-        .then(resolve)
-        .catch(
-          (err: Error): Promise<any> | void => {
-            if (--times > 0) {
-              return wait(delay)
-                .then((): Promise<T> => retry<T>(func, times, delay))
-                .then(resolve)
-                .catch(reject);
-            }
-            return reject(err);
-          }
-        );
-    }
-  );
+  return new Promise<T>((resolve, reject): void => {
+    func()
+      .then(resolve)
+      .catch((err: Error): Promise<any> | void => {
+        if (--times > 0) {
+          return wait(delay)
+            .then((): Promise<T> => retry<T>(func, times, delay))
+            .then(resolve)
+            .catch(reject);
+        }
+        return reject(err);
+      });
+  });
 }
 
 export default retry;

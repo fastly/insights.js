@@ -12,12 +12,10 @@ describe("getClientInfo", (): void => {
       .reply(200, clientInfoFixture);
 
     const output = getClientInfo("https://api.fastly.com/client-info");
-    return output.then(
-      (result: ClientInfo): void => {
-        expect(result.client_ip).toEqual("1.2.3.4");
-        expect(result.client_asn).toEqual(10225);
-        expect(result.resolver_asn).toEqual(33);
-      }
-    );
+    return output.then((result: ClientInfo): void => {
+      expect(result.client_ip).toEqual("1.2.3.4");
+      expect(result.client_asn).toEqual(10225);
+      expect(result.resolver_asn).toEqual(33);
+    });
   });
 });

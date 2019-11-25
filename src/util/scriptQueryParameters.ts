@@ -19,11 +19,9 @@ export default function getParameters(srcRegExp: RegExp): QueryParameters {
 
     // We can't use url.searchParams.entries().reduce() here as lib.d.ts
     // doesn't declare the entries iterable type on the object :(
-    url.searchParams.forEach(
-      (value: string, key: string): void => {
-        result[key] = value;
-      }
-    );
+    url.searchParams.forEach((value: string, key: string): void => {
+      result[key] = value;
+    });
   }
 
   return result;

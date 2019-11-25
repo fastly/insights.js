@@ -9,10 +9,7 @@ describe("camelCaseToSnakeCase", (): void => {
     ${"fooBar123Baz"} | ${"foo_bar123_baz"}
     ${"foobar"}       | ${"foobar"}
     ${"_foobar"}      | ${"foobar"}
-  `(
-    "should return $expected when given $a",
-    ({ a, expected }): void => {
-      expect(camelCaseToSnakeCase(a)).toEqual(expected);
-    }
-  );
+  `("should return $expected when given $a", ({ a, expected }): void => {
+    expect(camelCaseToSnakeCase(a)).toEqual(expected);
+  });
 });

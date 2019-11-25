@@ -10,74 +10,60 @@ describe("POP", (): void => {
 
     let mockRequest: nock.Scope;
 
-    beforeEach(
-      (): void => {
-        const url = new URL(taskDataFixture.resource);
-        const { protocol, host, pathname } = url;
-        mockRequest = nock(`${protocol}//${host}`)
-          .get(pathname)
-          .reply(200, svgFixture, {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Expose-Headers": "X-Datacenter",
-            "Timing-Allow-Origin": "*",
-            "X-Datacenter": "MAD",
-            "Content-Type": "image/svg+xml"
-          });
-      }
-    );
+    beforeEach((): void => {
+      const url = new URL(taskDataFixture.resource);
+      const { protocol, host, pathname } = url;
+      mockRequest = nock(`${protocol}//${host}`)
+        .get(pathname)
+        .reply(200, svgFixture, {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Expose-Headers": "X-Datacenter",
+          "Timing-Allow-Origin": "*",
+          "X-Datacenter": "MAD",
+          "Content-Type": "image/svg+xml"
+        });
+    });
 
-    afterEach(
-      (): void => {
-        nock.restore();
-        nock.activate();
-      }
-    );
+    afterEach((): void => {
+      nock.restore();
+      nock.activate();
+    });
 
     it("should fetch the given POP resource", (): Promise<void> => {
-      return task.execute().then(
-        (): void => {
-          expect(mockRequest.isDone()).toBeTruthy();
-        }
-      );
+      return task.execute().then((): void => {
+        expect(mockRequest.isDone()).toBeTruthy();
+      });
     });
 
     it("should get the datacenter ID from the response header", (): Promise<
       void
     > => {
-      return task.execute().then(
-        (beacon: Beacon): void => {
-          const result = JSON.parse(beacon.task_client_data);
-          expect(result).toHaveProperty("subject_id");
-          expect(result.subject_id).toEqual("MAD");
-        }
-      );
+      return task.execute().then((beacon: Beacon): void => {
+        const result = JSON.parse(beacon.task_client_data);
+        expect(result).toHaveProperty("subject_id");
+        expect(result.subject_id).toEqual("MAD");
+      });
     });
 
     it("should get the resource timing extry for the request", (): Promise<
       void
     > => {
-      return task.execute().then(
-        (beacon: Beacon): void => {
-          const result = JSON.parse(beacon.task_client_data);
-          expect(result).toHaveProperty("subject_request_start");
-          expect(typeof result.subject_request_start).toEqual("number");
-        }
-      );
+      return task.execute().then((beacon: Beacon): void => {
+        const result = JSON.parse(beacon.task_client_data);
+        expect(result).toHaveProperty("subject_request_start");
+        expect(typeof result.subject_request_start).toEqual("number");
+      });
     });
 
     it("should prefix all result data keys with subject_", (): Promise<
       void
     > => {
-      return task.execute().then(
-        (beacon: Beacon): void => {
-          const result = JSON.parse(beacon.task_client_data);
-          Object.keys(result).forEach(
-            (key): void => {
-              expect(key).toContain("subject_");
-            }
-          );
-        }
-      );
+      return task.execute().then((beacon: Beacon): void => {
+        const result = JSON.parse(beacon.task_client_data);
+        Object.keys(result).forEach((key): void => {
+          expect(key).toContain("subject_");
+        });
+      });
     });
   });
 });

@@ -21,39 +21,37 @@ function asyncGetEntry(
   name: string,
   timeout = 5000
 ): Promise<ResourceTimingEntry> {
-  return new Promise(
-    (resolve, reject): void => {
-      let entry: PerformanceEntry | undefined;
+  return new Promise((resolve, reject): void => {
+    let entry: PerformanceEntry | undefined;
 
-      const observer = new PerformanceObserver(
-        (
-          list: PerformanceObserverEntryList,
-          observer: PerformanceObserver
-        ): void => {
-          const namedEntries = list.getEntriesByName(name);
-          entry = namedEntries.shift();
+    const observer = new PerformanceObserver(
+      (
+        list: PerformanceObserverEntryList,
+        observer: PerformanceObserver
+      ): void => {
+        const namedEntries = list.getEntriesByName(name);
+        entry = namedEntries.shift();
 
-          if (entry) {
-            observer.disconnect();
-            resolve((entry as any) as ResourceTimingEntry);
-          }
-        }
-      );
-
-      setTimeout((): void => {
-        if (!entry) {
+        if (entry) {
           observer.disconnect();
-          reject(new Error("Timed out observing resource timing"));
+          resolve((entry as any) as ResourceTimingEntry);
         }
-      }, timeout);
-
-      try {
-        observer.observe({ entryTypes: ["resource"] });
-      } catch (e) {
-        reject(e);
       }
+    );
+
+    setTimeout((): void => {
+      if (!entry) {
+        observer.disconnect();
+        reject(new Error("Timed out observing resource timing"));
+      }
+    }, timeout);
+
+    try {
+      observer.observe({ entryTypes: ["resource"] });
+    } catch (e) {
+      reject(e);
     }
-  );
+  });
 }
 
 function cloneEntry(entry: ResourceTimingEntry): ResourceTimingEntry {
