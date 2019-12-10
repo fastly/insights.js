@@ -1,0 +1,2 @@
+const svg = `<svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 204"><style>.st0{fill:#ff282d}</style><path class="st0" d="M111 96l-3-4-16 15-3-1c-4 0-8 4-8 8s4 8 8 8 8-3 8-8v-2l14-16z"/><path class="st0" d="M106 29V15h5V4H69v11h5v14a87 87 0 1 0 32 0zM90 70zm3 89v-5h-5v5c-23-1-41-20-42-42h5v-5h-5c1-23 19-41 42-42v5h5v-5c22 1 41 19 42 42h-5v5h5c-1 23-20 41-42 42z"/></svg>`;
+export default svg;
