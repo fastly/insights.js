@@ -60,9 +60,11 @@ describe("POP", (): void => {
     > => {
       return task.execute().then((beacon: Beacon): void => {
         const result = JSON.parse(beacon.task_client_data);
-        Object.keys(result).forEach((key): void => {
-          expect(key).toContain("subject_");
-        });
+        Object.keys(result)
+          .filter((key): boolean => !key.includes("client_"))
+          .forEach((key): void => {
+            expect(key).toContain("subject_");
+          });
       });
     });
   });
