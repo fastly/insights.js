@@ -1,8 +1,8 @@
 # Insights.js [![Travis Build Status][travis-img]][travis]
 Real user monitoring 
 
-[travis]: https://travis-ci.com/fastly/insights.js
-[travis-img]: https://travis-ci.com/fastly/insights.js.svg?token=i6WATLrpQktJR1HWpL2Y&branch=master
+[travis]: https://travis-ci.org/fastly/insights.js
+[travis-img]: https://api.travis-ci.org/fastly/insights.js.svg
 
 ## Quick links
 - [FAQ](#faq)
@@ -64,7 +64,7 @@ The results of each task are normalized (such as IP anonymization, see [full lis
 The service then adds additional data available from Fastly’s [standard logging variables](https://docs.fastly.com/guides/streaming-logs/useful-variables-to-log) related to the network request and logs all final data to a Fastly managed data warehouse.
 
 ### Request flow
-![Request flow](https://github.com/fastly/insights.js/blob/master/doc/request-flow.png)
+![Request flow](https://insights.fastlylabs.com/static/media/request-flow.4b4fe6cf.png)
 
 1. Page load.
 1. Fetches configuration from Fastly Insights service.
