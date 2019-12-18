@@ -35,11 +35,10 @@ function getConfig(url: string): Promise<Config> {
   return retry(fetchJSON);
 }
 
-export function init({
-  host,
-  k: apiToken
-}: QueryParameters): Promise<Beacon[]> {
-  const configHost = PRODUCTION ? host : "https://test.fastly-insights.com";
+export function init({ k: apiToken }: QueryParameters): Promise<Beacon[]> {
+  const configHost = PRODUCTION
+    ? "https://fastly-insights.com"
+    : "https://test.fastly-insights.com";
   const configUrl = `${configHost}${CONFIG_PATH}${apiToken}`;
   return getConfig(configUrl)
     .then(runTasks)
