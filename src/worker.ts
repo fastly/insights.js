@@ -7,9 +7,6 @@ import sequence from "./util/promiseSequence";
 import { create as createTask } from "./tasks";
 import Task from "./tasks/task";
 
-// This is declared via Webpack DefinePlugin at compile time
-declare const PRODUCTION: boolean;
-
 function runTasks(configuration: Config): Promise<Beacon[]> {
   const {
     client,
@@ -35,10 +32,14 @@ function getConfig(url: string): Promise<Config> {
   return retry(fetchJSON);
 }
 
-export function init({ k: apiToken }: QueryParameters): Promise<Beacon[]> {
-  const configHost = PRODUCTION
-    ? "https://fastly-insights.com"
-    : "https://test.fastly-insights.com";
+export function init({
+  host,
+  k: apiToken
+}: QueryParameters): Promise<Beacon[]> {
+  const configHost =
+    host === "https://www.fastly-insights.com"
+      ? "https://fastly-insights.com"
+      : host;
   const configUrl = `${configHost}${CONFIG_PATH}${apiToken}`;
   return getConfig(configUrl)
     .then(runTasks)
