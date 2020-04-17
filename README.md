@@ -161,5 +161,8 @@ We may retain the raw information collected from individual Fastly Insights sess
 ### Fastly’s commitment to transparency
 Any changes to this FAQ document and the data we collect over time will be logged in our [change log](https://github.com/fastly/insights.js/blob/master/CHANGELOG.md).
 
+## Community Support
+<img alt="Testing Powered By SauceLabs" src="https://raw.githubusercontent.com/saucelabs/opensource/master/assets/powered-by-saucelabs-badge-white.svg?sanitize=true" width="160">
+
 ## License
 [MIT](https://github.com/fastly/insights.js/blob/master/LICENSE)
