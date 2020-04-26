@@ -5,6 +5,20 @@ import camelCaseToSnakeCase from "../util/camelCaseToSnakeCase";
 
 const EXCLUDED_PROPS = ["name", "initiatorType", "entryType"];
 
+function getValidEntry(
+  list: PerformanceEntryList
+): ResourceTimingEntry | undefined {
+  let k = 0;
+  while (k < list.length) {
+    const e = (list[k] as any) as ResourceTimingEntry;
+    if (e.requestStart !== 0 && e.connectStart !== e.connectEnd) {
+      return e;
+    }
+    k++;
+  }
+  return undefined;
+}
+
 /**
  * Asyncronusly gets a resource timing entry from the performance timeline
  * by its name (url). It starts a PerformanceObserver to observe the timeling
@@ -22,7 +36,7 @@ function asyncGetEntry(
   timeout = 5000
 ): Promise<ResourceTimingEntry> {
   return new Promise((resolve, reject): void => {
-    let entry: PerformanceEntry | undefined;
+    let entry: ResourceTimingEntry | undefined;
 
     const observer = new PerformanceObserver(
       (
@@ -30,11 +44,11 @@ function asyncGetEntry(
         observer: PerformanceObserver
       ): void => {
         const namedEntries = list.getEntriesByName(name);
-        entry = namedEntries.pop();
+        entry = getValidEntry(namedEntries);
 
         if (entry) {
           observer.disconnect();
-          resolve((entry as any) as ResourceTimingEntry);
+          resolve(entry);
         }
       }
     );
@@ -101,6 +115,7 @@ const normalizeEntry = compose(
 
 export {
   asyncGetEntry,
+  getValidEntry,
   cloneEntry,
   removeEntryProps,
   normalizeEntryKeys,

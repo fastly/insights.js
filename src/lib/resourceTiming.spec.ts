@@ -1,5 +1,6 @@
 import {
   asyncGetEntry,
+  getValidEntry,
   cloneEntry,
   removeEntryProps,
   normalizeEntry
@@ -56,6 +57,20 @@ describe("Resource timing", (): void => {
         expect(args).toHaveProperty("entryTypes");
         expect(args.entryTypes).toEqual(["resource"]);
       });
+    });
+  });
+
+  describe.only("#getValidEntry", (): void => {
+    it("should return a valid entry", (): void => {
+      const fixture = [entriesFixture[1], entriesFixture[0]];
+      expect(getValidEntry(fixture as PerformanceEntryList)).toEqual(
+        fixture[1]
+      );
+    });
+
+    it("should not return a invalid entry", (): void => {
+      const fixture = [entriesFixture[1]];
+      expect(getValidEntry(fixture as PerformanceEntryList)).toEqual(undefined);
     });
   });
 
