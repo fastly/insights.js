@@ -11,8 +11,8 @@ describe("hasProperty", (): void => {
 describe("hasProperties", (): void => {
   it("should test whether an object contains all properties from a list", (): void => {
     const obj = { foo: "bar", baz: { qux: 1 } };
-    const validFeatures = ["foo", "baz.qux"];
-    const invalidFeatures = ["bar", "baz"];
+    const validFeatures = ["foo", "baz"];
+    const invalidFeatures = ["bar", "qux"];
 
     expect(hasProperties(obj, validFeatures)).toBeTruthy();
     expect(hasProperties(obj, invalidFeatures)).toBeFalsy();
