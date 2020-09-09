@@ -12,12 +12,7 @@ declare global {
 }
 
 // List of required features browser features
-const requiredFeatures = [
-  "Worker",
-  "Promise",
-  "fetch",
-  "performance.getEntriesByType"
-];
+const requiredFeatures = ["Worker", "Promise", "fetch"];
 // Test whether browser has required feature support
 const hasFeatureSupport =
   hasProperties(window, requiredFeatures) &&
