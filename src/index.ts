@@ -12,9 +12,17 @@ declare global {
 }
 
 // List of required features browser features
-const requiredFeatures = ["Worker", "Promise", "fetch"];
+const requiredFeatures = [
+  "Worker",
+  "Promise",
+  "fetch",
+  "performance.getEntriesByType"
+];
 // Test whether browser has required feature support
-const hasFeatureSupport = hasProperties(window, requiredFeatures);
+const hasFeatureSupport =
+  hasProperties(window, requiredFeatures) &&
+  "getEntriesByType" in performance &&
+  typeof performance.getEntriesByType === "function";
 
 // Define global state
 const state: Fastly = {
