@@ -31,8 +31,8 @@ describe("scriptQueryParameters", (): void => {
         matcher: /test\.com/,
         expected: {
           foo: "bar",
-          host: "https://test.com"
-        }
+          host: "https://test.com",
+        },
       },
       {
         src: "https://test.com/path?foo=bar&baz=qux%20qaz",
@@ -40,9 +40,9 @@ describe("scriptQueryParameters", (): void => {
         expected: {
           foo: "bar",
           baz: "qux qaz",
-          host: "https://test.com"
-        }
-      }
+          host: "https://test.com",
+        },
+      },
     ];
 
     for (const test of tests) {

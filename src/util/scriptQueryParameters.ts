@@ -1,3 +1,5 @@
+import { QueryParameters } from "../@types";
+
 const getElements = (element: string): Element[] =>
   [].slice.call(document.getElementsByTagName(element));
 const elementHasSource = (el: Element): boolean => el.hasAttribute("src");

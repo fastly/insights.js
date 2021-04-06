@@ -1,25 +1,25 @@
 {
   "compilerOptions": {
     "strict": true,
+    "rootDir": "src",
+    "outDir": "dist",
     "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "esModuleInterop": true,
     "noUnusedLocals": true,
-    "declarationDir": "dist/types",
-    "declaration": true,
-    "target": "esnext",
-    "module": "commonjs",
-    "noEmit": true,
-    "lib": [
-      "dom"
-    ]
+    "target": "ES5",
+    "module": "ES2015",
+    "lib": ["DOM", "ES2015", "ES2020"],
+    "moduleResolution": "node",
+    "preserveSymlinks": true,
+    "removeComments": true
   },
   "include": [
     "src/**/*"
   ],
   "exclude": [
-    "node_modules",
     "dist"
   ]
 }

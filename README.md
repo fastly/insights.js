@@ -3,6 +3,7 @@ Real user monitoring
 
 [travis]: https://travis-ci.org/fastly/insights.js
 [travis-img]: https://api.travis-ci.org/fastly/insights.js.svg
+[open-insights]: https://github.com/openinsights/openinsights
 
 ## Quick links
 - [FAQ](#faq)
@@ -44,7 +45,7 @@ start | Runs the development server in watch mode
 ### What is it?
 Fastly Insights is an optional service deployed by some Fastly customers for network and performance monitoring and research purposes. It does not collect any personal data. We are only interested in your network, to make the internet work better.
 
-We collect information about HTTP and HTTPS network transactions, including: network routing, performance timing, and equipment characteristics. Measurements are recorded to analyze the performance of the Fastly network and overall state of the internet. 
+The JavaScript library is built using the [Open Insights][open-insights] framework. We collect information about HTTP and HTTPS network transactions, including: network routing, performance timing, and equipment characteristics. Measurements are recorded to analyze the performance of the Fastly network and overall state of the internet. 
 
 Insights.js is served via Fastly’s CDN. All collected data is sent back to the Fastly Insights service and log streamed using Fastly’s [log streaming](https://docs.fastly.com/guides/streaming-logs/) to a Fastly managed data warehouse for subsequent analysis. 
 
