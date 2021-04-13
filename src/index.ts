@@ -60,8 +60,14 @@ if (hasFeatureSupport) {
     // We use apply here as we don't want to directly assign i.e.
     // replace the existing results array, there are also certain scenarios
     // (such as the demo website) in which the results array already exists as
-    // an Aarry-like object and thus using apply() is required.
-    Array.prototype.push.apply(state.results, result.testResults);
+    // an Array-like object and thus using apply() is required.
+    Array.prototype.push.apply(
+      state.results,
+      result.testResults
+        .filter((r) => r.beaconData !== undefined)
+        /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+        .map((r) => r!.beaconData!.data)
+    );
   });
 }
 
