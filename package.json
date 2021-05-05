@@ -27,7 +27,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@fastly/open-insights-provider-fastly": "^1.0.0",
+    "@fastly/open-insights-provider-fastly": "^1.0.1",
     "@openinsights/openinsights": "^0.2.1"
   },
   "devDependencies": {
